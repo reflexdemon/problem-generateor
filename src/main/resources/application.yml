@@ -1,0 +1,6 @@
+loader:
+    verbose: true
+logging:
+    level:
+        org:
+          springframework:
