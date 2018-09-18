@@ -5,3 +5,4 @@
 
 [![codecov](https://codecov.io/gh/reflexdemon/problem-generateor/branch/master/graph/badge.svg)](https://codecov.io/gh/reflexdemon/problem-generateor)
 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
