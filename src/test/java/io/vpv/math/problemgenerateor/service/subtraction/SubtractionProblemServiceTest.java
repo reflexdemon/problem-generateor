@@ -23,7 +23,7 @@ public class SubtractionProblemServiceTest extends BaseProblemServiceTest {
         int lowerBound = 10;
         int upperBound = 300;
         ProblemStatement problemStatement = subtractionProblemService.generateProblemStatement(lowerBound, upperBound);
-        Assert.assertTrue("Should have the first number greater than second", problemStatement.getFirstNumber() > problemStatement.getSecondNumber());
+        Assert.assertTrue("Should have the first number greater than second number", problemStatement.getFirstNumber() > problemStatement.getSecondNumber());
     }
 
 }
