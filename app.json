@@ -1,0 +1,13 @@
+{
+    "name": "Problem Generator",
+    "description": "This is a problem Generator Service",
+    "repository": "https://github.com/reflexdemon/problem-generateor",
+    "keywords": [
+        "java",
+        "spring",
+        "boot",
+        "springboot",
+        "blog",
+        "example"
+    ]
+}
