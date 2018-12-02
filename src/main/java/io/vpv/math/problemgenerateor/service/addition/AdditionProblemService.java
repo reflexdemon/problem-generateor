@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdditionProblemService implements ProblemService {
 
+    private final RandomNumberUtil randomNumberUtil;
+
     @Autowired
-    private RandomNumberUtil randomNumberUtil;
+    public AdditionProblemService(RandomNumberUtil randomNumberUtil) {
+        this.randomNumberUtil = randomNumberUtil;
+    }
 
     @Override
     public ProblemStatement generateProblemStatement(int lowerBound, int upperBound) {
