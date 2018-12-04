@@ -32,6 +32,7 @@ public class SubtractionProblemService implements ProblemService {
 
         statement.setFirstNumber(first);
         statement.setSecondNumber(second);
+        statement.setAnswer(statement.getFirstNumber() - statement.getSecondNumber());
         return statement;
     }
 }

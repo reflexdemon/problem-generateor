@@ -21,6 +21,7 @@ public class AdditionProblemService implements ProblemService {
         ProblemStatement statement = new ProblemStatement();
         statement.setFirstNumber(randomNumberUtil.getRandomInt(lowerBound, upperBound));
         statement.setSecondNumber(randomNumberUtil.getRandomInt(lowerBound, upperBound));
+        statement.setAnswer(statement.getFirstNumber() + statement.getSecondNumber());
         return statement;
     }
 }

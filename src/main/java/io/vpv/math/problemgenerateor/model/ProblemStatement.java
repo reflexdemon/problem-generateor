@@ -4,6 +4,15 @@ public class ProblemStatement {
 
     private int firstNumber;
     private  int secondNumber;
+    private int answer;
+
+    public int getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(int answer) {
+        this.answer = answer;
+    }
 
     public int getFirstNumber() {
         return firstNumber;
@@ -26,6 +35,7 @@ public class ProblemStatement {
         final StringBuilder sb = new StringBuilder("ProblemStatement{");
         sb.append("firstNumber=").append(firstNumber);
         sb.append(", secondNumber=").append(secondNumber);
+        sb.append(", answer=").append(answer);
         sb.append('}');
         return sb.toString();
     }
