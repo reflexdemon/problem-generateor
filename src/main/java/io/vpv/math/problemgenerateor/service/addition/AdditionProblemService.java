@@ -18,7 +18,6 @@ public class AdditionProblemService implements ProblemService {
 
     @Override
     public ProblemStatement generateProblemStatement(int lowerBound, int upperBound) {
-        //TODO: Write Tests
         ProblemStatement statement = new ProblemStatement();
         statement.setFirstNumber(randomNumberUtil.getRandomInt(lowerBound, upperBound));
         statement.setSecondNumber(randomNumberUtil.getRandomInt(lowerBound, upperBound));
