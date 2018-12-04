@@ -38,7 +38,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("Math Problem Generator API")
                 .description("REST API for Generating Simple Math Problems")
-                .termsOfServiceUrl("http://math.vpv.io/")
+                .termsOfServiceUrl("http://math.vpv.io/swagger-ui.html")
                 .contact(contact())
                 .license("Back to Home Page")
                 .licenseUrl("/")
