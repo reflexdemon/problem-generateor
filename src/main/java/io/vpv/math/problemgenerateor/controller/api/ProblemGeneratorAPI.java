@@ -14,6 +14,7 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 import static org.slf4j.LoggerFactory.getLogger;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 public class ProblemGeneratorAPI extends BaseAPI {
@@ -26,7 +27,7 @@ public class ProblemGeneratorAPI extends BaseAPI {
         this.problemGenerator = problemGenerator;
     }
 
-    @RequestMapping(path = "/add")
+    @RequestMapping(path = "/add", method = GET)
     public ResponseEntity<List<ProblemStatement>> getAddProblems(@RequestParam(required = false, defaultValue = "10") final String size,
                                                                  @RequestParam(required = false, defaultValue = "10") final String min,
                                                                  @RequestParam(required = false, defaultValue = "100") final String max
@@ -36,7 +37,7 @@ public class ProblemGeneratorAPI extends BaseAPI {
         return new ResponseEntity<>(problems, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/sub")
+    @RequestMapping(path = "/sub", method = GET)
     public ResponseEntity<List<ProblemStatement>> getSubProblems(@RequestParam(required = false, defaultValue = "10") final String size,
                                                                  @RequestParam(required = false, defaultValue = "10") final String min,
                                                                  @RequestParam(required = false, defaultValue = "100") final String max

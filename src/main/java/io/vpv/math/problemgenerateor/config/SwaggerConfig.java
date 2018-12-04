@@ -31,14 +31,14 @@ public class SwaggerConfig {
     }
 
     private Contact contact() {
-        return new Contact("Venkateswara VP", "https://boottree.vpv.io", "contact@vpv.io");
+        return new Contact("Venkateswara VP", "https://contact.vpv.io", "contact@vpv.io");
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("REST Spring Boot Dependency Project")
-                .description("REST API for Accessing the dependency for Spring Boot Project")
-                .termsOfServiceUrl("http://boottree.vpv.io/")
+                .description("REST API for Generating Simple Math Problems")
+                .termsOfServiceUrl("http://math.vpv.io/")
                 .contact(contact())
                 .license("Back to Home Page")
                 .licenseUrl("/")
