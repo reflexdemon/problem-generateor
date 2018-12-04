@@ -36,7 +36,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("REST Spring Boot Dependency Project")
+                .title("Math Problem Generator API")
                 .description("REST API for Generating Simple Math Problems")
                 .termsOfServiceUrl("http://math.vpv.io/")
                 .contact(contact())
