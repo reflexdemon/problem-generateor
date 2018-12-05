@@ -46,4 +46,14 @@ public class ProblemGeneratorAPI extends BaseAPI {
         logger.debug("Problems:" + problems);
         return new ResponseEntity<>(problems, HttpStatus.OK);
     }
+
+    @RequestMapping(path = "/mul", method = GET)
+    public ResponseEntity<List<ProblemStatement>> getMulProblems(@RequestParam(required = false, defaultValue = "10") final String size,
+                                                                 @RequestParam(required = false, defaultValue = "2") final String min,
+                                                                 @RequestParam(required = false, defaultValue = "10") final String max
+    ) {
+        List<ProblemStatement> problems = problemGenerator.getMulProblems(parseInt(size), parseInt(min), parseInt(max));
+        logger.debug("Problems:" + problems);
+        return new ResponseEntity<>(problems, HttpStatus.OK);
+    }
 }
