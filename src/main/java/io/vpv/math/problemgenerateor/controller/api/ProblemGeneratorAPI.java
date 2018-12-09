@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
+import static java.util.Arrays.asList;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -22,9 +23,19 @@ public class ProblemGeneratorAPI extends BaseAPI {
 
     private ProblemGenerator problemGenerator;
 
+    private static final String[] API_ENDPOINTS = {"/add", "/sub", "/mul"};
+
     @Autowired
     public ProblemGeneratorAPI(final ProblemGenerator problemGenerator) {
         this.problemGenerator = problemGenerator;
+    }
+
+
+    @RequestMapping(path = "/", method = GET)
+    public ResponseEntity<List<String>> getApiEndpoints() {
+        List<String> apiEndpoints = asList(API_ENDPOINTS);
+        logger.debug("Problems:" + apiEndpoints);
+        return new ResponseEntity<>(apiEndpoints, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/add", method = GET)
