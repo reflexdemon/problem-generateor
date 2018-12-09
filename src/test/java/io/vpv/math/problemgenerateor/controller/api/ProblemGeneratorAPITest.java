@@ -22,6 +22,14 @@ public class ProblemGeneratorAPITest extends ProblemGenerateorApplicationTests {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).dispatchOptions(true).build();
     }
 
+
+    @Test
+    public void getAllApiEndpoints() throws Exception {
+        mockMvc.perform(get("/api/"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$[0]").isNotEmpty());
+    }
     @Test
     public void getAddProblems() throws Exception {
         mockMvc.perform(get("/api/add"))
