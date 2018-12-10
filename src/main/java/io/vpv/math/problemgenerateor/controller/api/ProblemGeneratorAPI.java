@@ -23,7 +23,7 @@ public class ProblemGeneratorAPI extends BaseAPI {
 
     private ProblemGenerator problemGenerator;
 
-    private static final String[] API_ENDPOINTS = {"/add", "/sub", "/mul"};
+    private static final String[] API_ENDPOINTS = {"/add", "/sub", "/mul", "/div"};
 
     @Autowired
     public ProblemGeneratorAPI(final ProblemGenerator problemGenerator) {
@@ -64,6 +64,16 @@ public class ProblemGeneratorAPI extends BaseAPI {
                                                                  @RequestParam(required = false, defaultValue = "10") final String max
     ) {
         List<ProblemStatement> problems = problemGenerator.getMulProblems(parseInt(size), parseInt(min), parseInt(max));
+        logger.debug("Problems:" + problems);
+        return new ResponseEntity<>(problems, HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/div", method = GET)
+    public ResponseEntity<List<ProblemStatement>> getDivProblems(@RequestParam(required = false, defaultValue = "10") final String size,
+                                                                 @RequestParam(required = false, defaultValue = "2") final String min,
+                                                                 @RequestParam(required = false, defaultValue = "10") final String max
+    ) {
+        List<ProblemStatement> problems = problemGenerator.getDivProblems(parseInt(size), parseInt(min), parseInt(max));
         logger.debug("Problems:" + problems);
         return new ResponseEntity<>(problems, HttpStatus.OK);
     }

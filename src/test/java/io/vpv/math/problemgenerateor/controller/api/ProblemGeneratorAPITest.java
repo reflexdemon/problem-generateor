@@ -56,6 +56,14 @@ public class ProblemGeneratorAPITest extends ProblemGenerateorApplicationTests {
     }
 
     @Test
+    public void getDivProblems() throws Exception {
+        mockMvc.perform(get("/api/div"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$[0].firstNumber").isNotEmpty());
+    }
+
+    @Test
     public void shouldBeAbleToDoCORS() throws Exception {
         mockMvc.perform(options("/api"))
                 .andExpect(status().isOk())
