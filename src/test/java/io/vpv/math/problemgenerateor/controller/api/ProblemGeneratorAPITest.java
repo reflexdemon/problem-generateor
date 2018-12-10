@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class ProblemGeneratorAPITest extends ProblemGenerateorApplicationTests {
@@ -25,7 +26,7 @@ public class ProblemGeneratorAPITest extends ProblemGenerateorApplicationTests {
 
     @Test
     public void getAllApiEndpoints() throws Exception {
-        mockMvc.perform(get("/api/"))
+        mockMvc.perform(get("/api"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$[0]").isNotEmpty());
@@ -52,5 +53,12 @@ public class ProblemGeneratorAPITest extends ProblemGenerateorApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$[0].firstNumber").isNotEmpty());
+    }
+
+    @Test
+    public void shouldBeAbleToDoCORS() throws Exception {
+        mockMvc.perform(options("/api"))
+                .andExpect(status().isOk())
+                .andExpect(header().string("Allow", "GET,HEAD"));
     }
 }

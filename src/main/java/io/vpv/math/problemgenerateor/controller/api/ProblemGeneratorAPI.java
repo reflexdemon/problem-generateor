@@ -31,7 +31,7 @@ public class ProblemGeneratorAPI extends BaseAPI {
     }
 
 
-    @RequestMapping(path = "/", method = GET)
+    @RequestMapping(path = "", method = GET)
     public ResponseEntity<List<String>> getApiEndpoints() {
         List<String> apiEndpoints = asList(API_ENDPOINTS);
         logger.debug("Problems:" + apiEndpoints);
