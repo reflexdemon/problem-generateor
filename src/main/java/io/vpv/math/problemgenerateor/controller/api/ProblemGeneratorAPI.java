@@ -2,6 +2,7 @@ package io.vpv.math.problemgenerateor.controller.api;
 
 import io.vpv.math.problemgenerateor.model.ProblemStatement;
 import io.vpv.math.problemgenerateor.service.ProblemGenerator;
+import io.vpv.math.problemgenerateor.util.RandomNumberUtil;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,15 +22,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class ProblemGeneratorAPI extends BaseAPI {
     private final Logger logger = getLogger(this.getClass());
 
-    private ProblemGenerator problemGenerator;
 
     private static final String[] API_ENDPOINTS = {"/add", "/sub", "/mul", "/div"};
 
     @Autowired
-    public ProblemGeneratorAPI(final ProblemGenerator problemGenerator) {
-        this.problemGenerator = problemGenerator;
+    public ProblemGeneratorAPI(final RandomNumberUtil randomNumberUtil, final ProblemGenerator problemGenerator) {
+        super(randomNumberUtil, problemGenerator);
     }
-
 
     @RequestMapping(path = "", method = GET)
     public ResponseEntity<List<String>> getApiEndpoints() {

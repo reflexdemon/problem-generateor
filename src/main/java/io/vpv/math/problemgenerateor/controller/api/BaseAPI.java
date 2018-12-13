@@ -1,6 +1,7 @@
 package io.vpv.math.problemgenerateor.controller.api;
 
 import io.vpv.math.problemgenerateor.model.ErrorResponse;
+import io.vpv.math.problemgenerateor.service.ProblemGenerator;
 import io.vpv.math.problemgenerateor.util.RandomNumberUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseAPI {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final RandomNumberUtil randomNumberUtil;
+    protected final RandomNumberUtil randomNumberUtil;
+    protected ProblemGenerator problemGenerator;
 
     @Autowired
-    public BaseAPI(RandomNumberUtil randomNumberUtil) {
+    public BaseAPI(final RandomNumberUtil randomNumberUtil, final ProblemGenerator problemGenerator) {
         this.randomNumberUtil = randomNumberUtil;
+        this.problemGenerator = problemGenerator;
     }
 
     @ExceptionHandler(Exception.class)
