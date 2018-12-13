@@ -32,7 +32,7 @@ public class ProblemGeneratorTest extends ProblemGenerateorApplicationTests {
         int lowerBound = 10;
         int upperBound = 100;
         List<ProblemStatement> subProblems = problemGenerator.getSubProblems(length, lowerBound, upperBound);
-        System.out.println("addsubProblems:" + subProblems);
+        System.out.println("subProblems:" + subProblems);
         Assert.assertNotNull("The result is not empty, ", subProblems);
         assertEquals("The length is matching", subProblems.size(), length);
     }

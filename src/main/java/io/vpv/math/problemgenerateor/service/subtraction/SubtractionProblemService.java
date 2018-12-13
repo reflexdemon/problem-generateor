@@ -19,7 +19,7 @@ public class SubtractionProblemService implements ProblemService {
     @Override
     public ProblemStatement generateProblemStatement(int lowerBound, int upperBound) {
         //TODO: Write Tests
-        ProblemStatement statement = new ProblemStatement();
+        ProblemStatement statement = new ProblemStatement("-");
         int first = randomNumberUtil.getRandomInt(lowerBound, upperBound);
         int second = randomNumberUtil.getRandomInt(lowerBound, upperBound);
 

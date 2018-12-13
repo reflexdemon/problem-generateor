@@ -69,4 +69,12 @@ public class ProblemGeneratorAPITest extends ProblemGenerateorApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(header().string("Allow", "GET,HEAD"));
     }
+
+    @Test
+    public void shouldBeAbleToThrowError() throws Exception {
+        mockMvc.perform(get("/api/div?size=badValue"))
+                .andExpect(status().is5xxServerError())
+                .andExpect(jsonPath(".code").isNotEmpty())
+                .andExpect(jsonPath(".message").isNotEmpty());
+    }
 }
