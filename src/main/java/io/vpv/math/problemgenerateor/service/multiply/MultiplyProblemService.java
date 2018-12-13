@@ -18,7 +18,7 @@ public class MultiplyProblemService implements ProblemService {
 
     @Override
     public ProblemStatement generateProblemStatement(int lowerBound, int upperBound) {
-        ProblemStatement statement = new ProblemStatement();
+        ProblemStatement statement = new ProblemStatement("*");
         statement.setFirstNumber(randomNumberUtil.getRandomInt(lowerBound, upperBound));
         statement.setSecondNumber(randomNumberUtil.getRandomInt(lowerBound, upperBound));
         statement.setAnswer(statement.getFirstNumber() * statement.getSecondNumber());

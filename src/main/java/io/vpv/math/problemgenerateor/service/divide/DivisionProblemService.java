@@ -19,7 +19,7 @@ public class DivisionProblemService implements ProblemService {
     @Override
     public ProblemStatement generateProblemStatement(int lowerBound, int upperBound) {
         //TODO: Write Tests
-        ProblemStatement statement = new ProblemStatement();
+        ProblemStatement statement = new ProblemStatement("/");
         int second = randomNumberUtil.getRandomInt(lowerBound, upperBound);
         int answer = randomNumberUtil.getRandomInt(lowerBound, upperBound);
         int first = second * answer;
