@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseAPI {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    protected final RandomNumberUtil randomNumberUtil;
-    protected ProblemGenerator problemGenerator;
+    private final RandomNumberUtil randomNumberUtil;
+    ProblemGenerator problemGenerator;
 
     @Autowired
     public BaseAPI(final RandomNumberUtil randomNumberUtil, final ProblemGenerator problemGenerator) {
