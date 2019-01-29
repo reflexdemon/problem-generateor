@@ -9,17 +9,28 @@
             @activate-timer="activate"
        />
     </p>
-    
+
     <section id="stopWatch">
       <p id="timer">Time : {{ timer }}</p>
     </section>
+    <section class="result" v-if="computedResult.total &gt; 0">
+      <table border="1" class="results">
+        <tr>
+            <th>Total Questions </th>
+            <td>{{ computedResult.total }}</td>
+        </tr>
+        <tr>
+            <th>Correct Answers </th>
+            <td>{{ computedResult.correctAnswers }}</td>
+        </tr>
+        <tr>
+            <th>Your Score</th>
+            <td>{{ computedResult.score }}</td>
+        </tr>
+      </table>
+    </section>
     <div v-for="r in responses" :key="r.$index" class="main">
-      <ProblemDisplay
-        :firstNumber="r.firstNumber"
-        :secondNumber="r.secondNumber"
-        :answer="r.answer"
-        :operator="r.operator"
-      />
+      <ProblemDisplay :response="r" />
     </div>
     <button v-on:click="finish" v-if="responses.length">Finish</button>
   </div>
@@ -50,6 +61,11 @@ export default {
         seconds: 0,
         timeout: function () {}
       },
+      computedResult: {
+        total: 0,
+        correctAnswers: 0,
+        score: 0
+      },
       input: {
         size: 10,
         min:100,
@@ -65,15 +81,34 @@ export default {
       fetch('https://math.vpv.io/api/add?size='+ this.input.size + '&min='+ this.input.min + '&max='+ this.input.max + '')
         .then(response => response.json())
         .then(data => {
+          this.responsesBackup = [];
           this.responses = data;
           this.initTimer();
         });
     },
     finish: function() {
-      
+        this.result();
     },
     result: function () {
-
+      var handler = [];
+      if (this.responses && this.responses.length) {
+        handler = this.responses;
+      } else if (this.responsesBackup && this.responsesBackup.length) {
+        handler = this.responsesBackup;
+      } else {
+        console.log('No Test in progress');
+      }
+      if (handler && handler.length) {
+        //console.log('Response: ', handler);
+        this.computedResult.total = handler.length;
+        this.computedResult.correctAnswers = 0;
+        handler.forEach(r => {
+          if (r.answer == r.result) {
+              this.computedResult.correctAnswers++;
+              this.computedResult.score = (100.0 * this.computedResult.correctAnswers/handler.length);
+          }
+        });
+      }
     },
     initTimer: function() {
           this.clearTimer();
@@ -195,5 +230,37 @@ button {
   display: none;
   font-size: 16px;
   font-weight: bold;
+}
+.results {
+    margin-left:auto;
+    margin-right:auto;
+}
+table.results {
+  border: 3px solid #000000;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.results td, table.results th {
+  border: 1px solid #000000;
+  padding: 5px 10px;
+}
+table.results tbody td {
+  font-size: 13px;
+}
+table.results th {
+  background: #CFCFCF;
+  background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  border-right: 3px solid #000000;
+}
+table.results th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  text-align: left;
+}
+table.results  td {
+  font-size: 14px;
 }
 </style>
