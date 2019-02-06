@@ -9,6 +9,18 @@
   <v-card-actions>
     <v-text-field id="styled-input" height="120" type="number" name="answer" v-model="response.result"  autocomplete="off"/>
   </v-card-actions>
+  <v-btn
+              color="green"
+              dark
+              small
+              absolute
+              bottom
+              right
+              fab
+              @click="$vuetify.goTo(0)"
+            >
+              <v-icon>arrow_upward</v-icon>
+            </v-btn>
 </v-card>
   </div>
 </template>
