@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav" class="navbar">
+    <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/add">Add</router-link>
@@ -16,35 +16,17 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+#nav {
+  padding: 30px;
 }
 
-
-
-/* Style the body */
-body {
-  font-family: Arial;
-  margin: 0;
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
 }
 
-
-/* Style the top navigation bar */
-.navbar {
-  display: flex;
-  background-color: #333;
-}
-
-/* Style the navigation bar links */
-.navbar a {
-  color: white;
-  padding: 14px 20px;
-  text-decoration: none;
-  text-align: center;
-}
-
-/* Change color on hover */
-.navbar a:hover {
-  background-color: #ddd;
-  color: black;
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

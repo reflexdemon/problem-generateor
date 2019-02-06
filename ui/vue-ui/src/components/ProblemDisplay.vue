@@ -15,12 +15,12 @@
 export default {
   name: 'ProblemDisplay',
   props: {
-      response: {
-        firstNumber: Number,
-        secondNumber: Number,
-        answer: Number,
-        result: Number,
-        operator: String,
+    response: {
+      firstNumber: Number,
+      secondNumber: Number,
+      answer: Number,
+      result: Number,
+      operator: String
     }
   }
 }
@@ -28,7 +28,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 
 .problem {
   display: inline-block;

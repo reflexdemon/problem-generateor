@@ -38,18 +38,17 @@
 
 <script>
 // @ is an alias to /src
-import ProblemDisplay from "@/components/ProblemDisplay.vue";
-import  UserInput from "@/components/UserInput.vue";
-import { clearTimeout } from 'timers';
-
+import ProblemDisplay from '@/components/ProblemDisplay.vue'
+import UserInput from '@/components/UserInput.vue'
+import { clearTimeout } from 'timers'
 
 export default {
-  name: "add",
+  name: 'add',
   components: {
     UserInput,
     ProblemDisplay
   },
-  data: function() {
+  data: function () {
     return {
       responses: [],
       responsesBackup: [],
@@ -68,93 +67,91 @@ export default {
       },
       input: {
         size: 10,
-        min:100,
-        max:999
+        min: 100,
+        max: 999
       }
-    };
+    }
   },
   methods: {
-    activate: function(size, min, max) {
-      this.input.size = size;
-      this.input.min = min;
-      this.input.max = max;
-      fetch('https://math.vpv.io/api/add?size='+ this.input.size + '&min='+ this.input.min + '&max='+ this.input.max + '')
+    activate: function (size, min, max) {
+      this.input.size = size
+      this.input.min = min
+      this.input.max = max
+      fetch('https://math.vpv.io/api/add?size=' + this.input.size + '&min=' + this.input.min + '&max=' + this.input.max + '')
         .then(response => response.json())
         .then(data => {
-          this.responsesBackup = [];
-          this.responses = data;
-          this.initTimer();
-        });
+          this.responsesBackup = []
+          this.responses = data
+          this.initTimer()
+        })
     },
-    finish: function() {
-        this.result();
+    finish: function () {
+      this.result()
     },
     result: function () {
-      var handler = [];
+      var handler = []
       if (this.responses && this.responses.length) {
-        handler = this.responses;
+        handler = this.responses
       } else if (this.responsesBackup && this.responsesBackup.length) {
-        handler = this.responsesBackup;
+        handler = this.responsesBackup
       } else {
-        console.log('No Test in progress');
+        console.log('No Test in progress')
       }
       if (handler && handler.length) {
-        //console.log('Response: ', handler);
-        this.computedResult.total = handler.length;
-        this.computedResult.correctAnswers = 0;
+        // console.log('Response: ', handler);
+        this.computedResult.total = handler.length
+        this.computedResult.correctAnswers = 0
         handler.forEach(r => {
-          if (r.answer == r.result) {
-              this.computedResult.correctAnswers++;
-              this.computedResult.score = (100.0 * this.computedResult.correctAnswers/handler.length);
+          if (r.answer === r.result) {
+            this.computedResult.correctAnswers++
+            this.computedResult.score = (100.0 * this.computedResult.correctAnswers / handler.length)
           }
-        });
+        })
       }
     },
-    initTimer: function() {
-          this.clearTimer();
-          this.internal.mins = 1;
-          this.internal.seconds = this.internal.mins * 60;
-          this.internal.timeout = setTimeout(this.timerFunction, 60);
+    initTimer: function () {
+      this.clearTimer()
+      this.internal.mins = 1
+      this.internal.seconds = this.internal.mins * 60
+      this.internal.timeout = setTimeout(this.timerFunction, 60)
     },
     clearTimer: function () {
-      this.minutes = this.pad(0,2);
-      this.seconds = this.pad(0,2);
+      this.minutes = this.pad(0, 2)
+      this.seconds = this.pad(0, 2)
       if (this.internal.timeout && this.internal.timeout.close) {
-        clearTimeout(this.internal.timeout);
+        clearTimeout(this.internal.timeout)
       }
     },
-    pad: function(n, width, z) {
-          z = z || '0';
-          n = n + '';
-          return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+    pad: function (n, width, z) {
+      z = z || '0'
+      n = n + ''
+      return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n
     },
-    getminutes: function() {
-      //minutes is seconds divided by 60, rounded down
-      this.internal.mins = Math.floor(this.internal.seconds / 60);
-      return this.pad(this.internal.mins, 2);
+    getminutes: function () {
+      // minutes is seconds divided by 60, rounded down
+      this.internal.mins = Math.floor(this.internal.seconds / 60)
+      return this.pad(this.internal.mins, 2)
     },
 
-    getseconds: function() {
-      //take minutes remaining (as seconds) away
-      //from total seconds remaining
-      return this.pad(this.internal.seconds - Math.round(this.internal.mins * 60), 2);
+    getseconds: function () {
+      // take minutes remaining (as seconds) away
+      // from total seconds remaining
+      return this.pad(this.internal.seconds - Math.round(this.internal.mins * 60), 2)
     },
-    timerFunction: function() {
+    timerFunction: function () {
       // this.minutes = this.internal.mins;
       // this.seconds = this.internal.seconds;
 
-      //if less than a minute remaining
-      //Display only seconds value.
+      // if less than a minute remaining
+      // Display only seconds value.
       if (this.internal.seconds < 59) {
-        this.seconds = this.internal.seconds;
-      }
-
-      //Display both minutes and seconds
-      //getminutes and getseconds is used to
-      //get minutes and seconds
-      else {
-        this.minutes = this.getminutes();
-        this.seconds = this.getseconds();
+        this.seconds = this.internal.seconds
+      } else {
+      // Display both minutes and seconds
+      // getminutes and getseconds is used to
+      // get minutes and seconds
+        this.minutes = this.getminutes()
+        this.seconds = this.getseconds()
       }
       // //when less than a minute remaining
       // //colour of the minutes and seconds
@@ -164,25 +161,24 @@ export default {
       //   seconds.style.color = "red";
       // }
 
-      //if seconds becomes zero,
-      //then page alert time up
+      // if seconds becomes zero,
+      // then page alert time up
       if (this.internal.seconds < 0) {
-        this.responsesBackup = this.responses;
-        this.responses = [];
-        this.clearTimer();
+        this.responsesBackup = this.responses
+        this.responses = []
+        this.clearTimer()
+      } else {
+        // if seconds > 0 then seconds is decremented
+        this.internal.seconds--
+        this.internal.timeout = setTimeout(this.timerFunction, 1000)
       }
-      //if seconds > 0 then seconds is decremented
-      else {
-        this.internal.seconds--;
-        this.internal.timeout = setTimeout(this.timerFunction, 1000);
-      }
-      this.timer = '' + this.minutes + ':' + this.seconds;
+      this.timer = '' + this.minutes + ':' + this.seconds
     }
   },
-  created: function() {
-    this.clearTimer();
+  created: function () {
+    this.clearTimer()
   }
-};
+}
 </script>
 <style scoped>
 /* Main column */

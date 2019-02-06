@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  name: "UserInput",
+  name: 'UserInput',
   data: function () {
     return {
       input: {
@@ -44,7 +44,7 @@ export default {
         min: this.min,
         max: this.max
       }
-    };
+    }
   },
   props: {
     size: Number,
@@ -54,14 +54,14 @@ export default {
   methods: {
     activateTimer: function () {
       this.$emit(
-        "activate-timer",
+        'activate-timer',
         this.input.size,
         this.input.min,
         this.input.max
-      );
+      )
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
