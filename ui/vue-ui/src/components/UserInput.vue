@@ -1,36 +1,28 @@
 <template>
   <div class="user-input">
-    <div class="inputForm" style="width: 200px;">
-      <table width="80%">
-        <tr>
-          <td>Number of problems</td>
-        </tr>
-        <tr>
-          <td>
+    <v-card>
+      <v-card-title primary-title>
+        <div>
+          <h3 class="headline mb-0">Problem Configuration</h3>
+          <div>Please enter the configuration to generate the puzzles</div>
+        </div>
+      </v-card-title>
+      <v-container fill-height fluid pa-2>
+        <v-layout fill-height>
+          <v-flex xs12 align-end flexbox>
+            <span>Number of problems</span>
             <v-text-field type="number" v-model.number="input.size" name="size"/>
-          </td>
-        </tr>
-        <tr>
-          <td>Starting Value</td>
-        </tr>
-        <tr>
-          <td>
+            <span>Starting Value</span>
             <v-text-field type="number" v-model.number="input.min" name="min"/>
-          </td>
-        </tr>
-        <tr>
-          <td>Endoing Value</td>
-        </tr>
-        <tr>
-          <td>
+            <span>Ending Value</span>
             <v-text-field type="number" v-model.number="input.max" name="max"/>
-          </td>
-        </tr>
-      </table>
-      <p>
-        <button v-on:click="activateTimer">Start Timer</button>
-      </p>
-    </div>
+          </v-flex>
+        </v-layout>
+      </v-container>
+      <v-card-actions>
+        <v-btn color="green" v-on:click="activateTimer">Start Timer</v-btn>
+      </v-card-actions>
+    </v-card>
   </div>
 </template>
 
@@ -53,6 +45,7 @@ export default {
   },
   methods: {
     activateTimer: function () {
+      console.log('Emmiting activate-timer event')
       this.$emit(
         'activate-timer',
         this.input.size,

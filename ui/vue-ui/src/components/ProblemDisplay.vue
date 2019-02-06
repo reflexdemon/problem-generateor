@@ -1,13 +1,14 @@
 <template>
   <div class="problem-display">
-    <div class="problem" style="width: 200px;">
-
-        {{response.firstNumber}}
-      <br>{{response.operator}} {{response.secondNumber}}
-
-      <br>
-      <input type="number" name="answer" v-model="response.result"  autocomplete="off">
-    </div>
+    <v-card>
+<v-card-text >
+<div class="display-4 text-xs-right">{{response.firstNumber}}</div>
+<div class="display-4 text-xs-right">{{response.operator}} {{response.secondNumber}}</div>
+</v-card-text>
+  <v-card-actions>
+    <v-text-field class="display-4" type="number" name="answer" v-model="response.result"  autocomplete="off"/>
+  </v-card-actions>
+</v-card>
   </div>
 </template>
 
