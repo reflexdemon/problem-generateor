@@ -10,12 +10,9 @@
       <v-container fill-height fluid pa-2>
         <v-layout fill-height>
           <v-flex xs12 align-end flexbox>
-            <span>Number of problems</span>
-            <v-text-field type="number" v-model.number="input.size" name="size"/>
-            <span>Starting Value</span>
-            <v-text-field type="number" v-model.number="input.min" name="min"/>
-            <span>Ending Value</span>
-            <v-text-field type="number" v-model.number="input.max" name="max"/>
+            <v-text-field label="Number of problems" type="number" v-model.number="input.size" name="size"/>
+            <v-text-field label="Starting Value" type="number" v-model.number="input.min" name="min"/>
+            <v-text-field label="Ending Value" type="number" v-model.number="input.max" name="max"/>
           </v-flex>
         </v-layout>
       </v-container>

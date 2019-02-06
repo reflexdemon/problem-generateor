@@ -31,7 +31,8 @@ export default {
       input: {
         size: 10,
         min: 100,
-        max: 999
+        max: 999,
+        duration: 2
       }
     }
   },
@@ -75,7 +76,7 @@ export default {
     },
     initTimer: function () {
       this.clearTimer()
-      this.internal.mins = 1
+      this.internal.mins = this.input.duration
       this.internal.seconds = this.internal.mins * 60
       this.internal.timeout = setTimeout(this.timerFunction, 60)
     },
