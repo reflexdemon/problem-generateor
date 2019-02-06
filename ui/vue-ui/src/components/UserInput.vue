@@ -7,7 +7,7 @@
         </tr>
         <tr>
           <td>
-            <input type="number" v-model.number="input.size" name="size">
+            <v-text-field type="number" v-model.number="input.size" name="size"/>
           </td>
         </tr>
         <tr>
@@ -15,7 +15,7 @@
         </tr>
         <tr>
           <td>
-            <input type="number" v-model.number="input.min" name="min">
+            <v-text-field type="number" v-model.number="input.min" name="min"/>
           </td>
         </tr>
         <tr>
@@ -23,7 +23,7 @@
         </tr>
         <tr>
           <td>
-            <input type="number" v-model.number="input.max" name="max">
+            <v-text-field type="number" v-model.number="input.max" name="max"/>
           </td>
         </tr>
       </table>
