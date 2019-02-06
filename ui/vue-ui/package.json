@@ -34,7 +34,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "ts-jest": "^23.0.0",
-    "typescript": "~3.2.2",
+    "typescript": "~3.1.1",
     "vue-cli-plugin-vuetify": "^0.4.6",
     "vue-template-compiler": "^2.5.21",
     "vuetify-loader": "^1.0.5"
@@ -88,7 +88,7 @@
     "testMatch": [
       "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
     ],
-    "testURL": "http://localhost/",
+    "testURL": "http://localhost:8080/",
     "globals": {
       "ts-jest": {
         "babelConfig": true

@@ -1,11 +1,12 @@
 <template>
-  <div class="add">
-    <h1>Addition Problem</h1>
+  <div class="add text-xs-center">
     <p>
       <UserInput
             :size="input.size"
             :min="input.min"
             :max="input.max"
+            :duration="input.duration"
+            title="Addition Problem"
             @activate-timer="activate"
        />
     </p>

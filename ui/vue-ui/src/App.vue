@@ -7,27 +7,19 @@
       app
     >
       <v-list dense>
-        <v-list-tile @click="callback" to="/">
+        <v-list-tile @click="callback" :to="item.to" v-for="item in menu">
           <v-list-tile-action>
-            <v-icon>dashboard</v-icon>
+            <v-icon>{{item.icon}}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile @click="callback" to="/add">
-          <v-list-tile-action>
-            <v-icon>settings</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Add</v-list-tile-title>
+            <v-list-tile-title>{{item.label}}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>VPV Math Puzzles</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <router-view/>
@@ -56,7 +48,23 @@
 <script>
 export default {
   data: () => ({
-    drawer: null
+    drawer: null,
+    menu: [ {
+      to: '/',
+      icon: 'home',
+      label: 'Home'
+    },
+    {
+      to: '/add',
+      icon: 'add',
+      label: 'Add'
+    },
+    {
+      to: '/about',
+      icon: 'info',
+      label: 'About'
+    }
+    ]
   }),
   props: {
     source: String

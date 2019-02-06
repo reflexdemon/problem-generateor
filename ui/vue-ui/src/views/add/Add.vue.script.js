@@ -37,12 +37,13 @@ export default {
     }
   },
   methods: {
-    activate: function (size, min, max) {
-      console.log(`calling activete(${size}, ${min}, ${max} )`)
+    activate: function (size, min, max, duration) {
+      console.log(`calling activete(${size}, ${min}, ${max}, ${duration} )`)
       this.input.size = size
       this.input.min = min
       this.input.max = max
-      fetch('https://math.vpv.io/api/add?size=' + this.input.size + '&min=' + this.input.min + '&max=' + this.input.max + '')
+      this.input.duration = duration
+      fetch('/api/add?size=' + this.input.size + '&min=' + this.input.min + '&max=' + this.input.max + '')
         .then(response => response.json())
         .then(data => {
           this.responsesBackup = []
@@ -78,7 +79,7 @@ export default {
       this.clearTimer()
       this.internal.mins = this.input.duration
       this.internal.seconds = this.internal.mins * 60
-      this.internal.timeout = setTimeout(this.timerFunction, 60)
+      this.internal.timeout = setTimeout(this.timerFunction, this.internal.seconds)
     },
     clearTimer: function () {
       this.minutes = this.pad(0, 2)
