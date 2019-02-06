@@ -1,13 +1,14 @@
 <template>
   <div class="problem-display">
-    <div class="problem" style="width: 200px;">
-      
-        {{firstNumber}}
-      <br>{{operator}} {{secondNumber}}
-      
-      <br>
-      <input type="text" name="answer" v-model="result"  autocomplete="off">
-    </div>
+    <v-card>
+<v-card-text >
+<div class="display-4 text-xs-right">{{response.firstNumber}}</div>
+<div class="display-4 text-xs-right">{{response.operator}} {{response.secondNumber}}</div>
+</v-card-text>
+  <v-card-actions>
+    <v-text-field class="display-4" type="number" name="answer" v-model="response.result"  autocomplete="off"/>
+  </v-card-actions>
+</v-card>
   </div>
 </template>
 
@@ -15,18 +16,19 @@
 export default {
   name: 'ProblemDisplay',
   props: {
-    firstNumber: Number,
-    secondNumber: Number,
-    answer: Number,
-    operator: String,
-    result: String
-  },
+    response: {
+      firstNumber: Number,
+      secondNumber: Number,
+      answer: Number,
+      result: Number,
+      operator: String
+    }
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 
 .problem {
   display: inline-block;
@@ -38,10 +40,10 @@ export default {
   margin-right: 10%;
   border: 2px solid #908b85;
   border-radius: 20px;
-  box-shadow: 
-    7px 10px 34px 1px 
-    rgba(0, 0, 0, 0.68), 
-    inset -1px -6px 12px 0.1px 
+  box-shadow:
+    7px 10px 34px 1px
+    rgba(0, 0, 0, 0.68),
+    inset -1px -6px 12px 0.1px
     #89847e;
 }
 input {

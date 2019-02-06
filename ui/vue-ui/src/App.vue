@@ -1,50 +1,71 @@
 <template>
-  <div id="app">
-    <div id="nav" class="navbar">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/add">Add</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app id="inspire" dark>
+    <v-navigation-drawer
+      v-model="drawer"
+      clipped
+      fixed
+      app
+    >
+      <v-list dense>
+        <v-list-tile @click="callback" to="/">
+          <v-list-tile-action>
+            <v-icon>dashboard</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Home</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="callback" to="/add">
+          <v-list-tile-action>
+            <v-icon>settings</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Add</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar app fixed clipped-left>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>Application</v-toolbar-title>
+    </v-toolbar>
+    <v-content>
+      <router-view/>
+    </v-content>
+    <v-footer app fixed>
+      <span class="text-center">
+
+        </span>
+    </v-footer>
+    <v-footer
+    height="auto"
+    app fixed
+  >
+    <v-layout
+      justify-center
+      row
+      wrap
+    >
+        &copy;{{new Date().getFullYear()}} - <strong> <a href="https://me.vpv.io">Venkateswara VP</a> </strong>
+
+    </v-layout>
+  </v-footer>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<script>
+export default {
+  data: () => ({
+    drawer: null
+  }),
+  props: {
+    source: String
+  },
+
+  methods: {
+    callback: function () {
+
+    }
+  }
 }
-
-
-
-/* Style the body */
-body {
-  font-family: Arial;
-  margin: 0;
-}
-
-
-/* Style the top navigation bar */
-.navbar {
-  display: flex;
-  background-color: #333;
-}
-
-/* Style the navigation bar links */
-.navbar a {
-  color: white;
-  padding: 14px 20px;
-  text-decoration: none;
-  text-align: center;
-}
-
-/* Change color on hover */
-.navbar a:hover {
-  background-color: #ddd;
-  color: black;
-}
-</style>
+</script>
