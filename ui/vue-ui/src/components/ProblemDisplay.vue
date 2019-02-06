@@ -2,11 +2,12 @@
   <div class="problem-display">
     <v-card>
 <v-card-text >
+  <v-badge> {{timer}} </v-badge>
 <div class="display-4 text-xs-right">{{response.firstNumber}}</div>
 <div class="display-4 text-xs-right">{{response.operator}} {{response.secondNumber}}</div>
 </v-card-text>
   <v-card-actions>
-    <v-text-field class="display-4" type="number" name="answer" v-model="response.result"  autocomplete="off"/>
+    <v-text-field id="styled-input" height="120" type="number" name="answer" v-model="response.result"  autocomplete="off"/>
   </v-card-actions>
 </v-card>
   </div>
@@ -22,13 +23,19 @@ export default {
       answer: Number,
       result: Number,
       operator: String
-    }
+    },
+    timer: String
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+#styled-input {
+    font-size: 112px !important;
+    font-weight: 300;
+}
 
 .problem {
   display: inline-block;

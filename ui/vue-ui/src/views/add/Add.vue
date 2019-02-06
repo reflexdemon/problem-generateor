@@ -31,8 +31,8 @@
     </section>
     <v-container grid-list-md text-xs-center>
     <v-layout row wrap>
-    <v-flex v-for="r in responses" :key="r.$index"  xs4>
-      <ProblemDisplay :response="r" />
+    <v-flex v-for="r in responses" :key="r.$index"  xs12 md6 lg4>
+      <ProblemDisplay :response="r" :timer="timer"/>
     </v-flex>
     </v-layout>
     </v-container>
