@@ -20,6 +20,7 @@
                 hint="Please choose the test duration."
                 min="1"
                 max="15"
+                thumb-label="always"
                 label="Duration in minutes">
                 </v-slider>
           </v-flex>
