@@ -4,3 +4,7 @@ logging:
     level:
         org:
           springframework:
+
+app:
+  aeskey: ${SECRET_KEY}
+  callback: "LOCAL_TESTING"
