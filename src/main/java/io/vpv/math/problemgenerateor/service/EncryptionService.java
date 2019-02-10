@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 
 /**
@@ -42,44 +43,44 @@ public class EncryptionService {
      *
      * Use this commented code if you don't like using DatatypeConverter dependency
      */
-    public static String toHexStringOld(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            sb.append(String.format("%02X", b));
-        }
-        return sb.toString();
-    }
-
-    public static byte[] toByteArrayOld(String s) {
-        int len = s.length();
-        byte[] data = new byte[len / 2];
-        for (int i = 0; i < len; i += 2) {
-            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character.digit(s.charAt(i +
-                    1), 16));
-        }
-        return data;
-    }
-
-//    public static String toHexString(byte[] array) {
-//        return DatatypeConverter.printHexBinary(array);
+//    public static String toHexStringOld(byte[] bytes) {
+//        StringBuilder sb = new StringBuilder();
+//        for (byte b : bytes) {
+//            sb.append(String.format("%02X", b));
+//        }
+//        return sb.toString();
 //    }
 //
-//    public static byte[] toByteArray(String s) {
-//        return DatatypeConverter.parseHexBinary(s);
+//    public static byte[] toByteArrayOld(String s) {
+//        int len = s.length();
+//        byte[] data = new byte[len / 2];
+//        for (int i = 0; i < len; i += 2) {
+//            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character.digit(s.charAt(i +
+//                    1), 16));
+//        }
+//        return data;
 //    }
+
+    public static String toHexString(byte[] array) {
+        return DatatypeConverter.printHexBinary(array);
+    }
+
+    public static byte[] toByteArray(String s) {
+        return DatatypeConverter.parseHexBinary(s);
+    }
 
     synchronized public String encrypt(String text) throws Exception {
         init();
         IvParameterSpec ivspec = new IvParameterSpec(IV_RAND);
         cipher.init(Cipher.ENCRYPT_MODE, aesKey, ivspec);
-        return toHexStringOld(cipher.doFinal(text.getBytes()));
+        return toHexString(cipher.doFinal(text.getBytes()));
     }
 
     synchronized public String decrypt(String text) throws Exception {
         init();
         IvParameterSpec ivspec = new IvParameterSpec(IV_RAND);
         cipher.init(Cipher.DECRYPT_MODE, aesKey, ivspec);
-        return new String(cipher.doFinal(toByteArrayOld(text)));
+        return new String(cipher.doFinal(toByteArray(text)));
     }
 
 }

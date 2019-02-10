@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Controller
 public class LoginController {
@@ -36,11 +35,7 @@ public class LoginController {
             User user = objectMapper.readValue(plainJSON, User.class);
             request.getSession().setAttribute(SecurityProtection.SESSION_USER, user);
         } catch (Exception e) {
-            try {
-                response.sendError(400, "User cannot login");
-            } catch (IOException e1) {
-                throw new RuntimeException("Problem", e1);
-            }
+            throw new RuntimeException("Problem", e);
         }
         return "redirect:/";
 
