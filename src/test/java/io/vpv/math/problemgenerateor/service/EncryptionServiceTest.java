@@ -5,8 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.*;
-
 public class EncryptionServiceTest extends ProblemGenerateorApplicationTests {
 
     @Autowired
@@ -44,9 +42,16 @@ public class EncryptionServiceTest extends ProblemGenerateorApplicationTests {
     }
 
     @Test(expected = Exception.class)
-    public void badGuy() throws Exception {
+    public void badGuy1() throws Exception {
         String text = "Hello World!";
         encryptionService.setKeyStr(BAD_PASS);
+        String result = encryptionService.encrypt(text);
+    }
+
+    @Test(expected = Exception.class)
+    public void badGuy2() throws Exception {
+        String text = "Hello World!";
+        encryptionService.setKeyStr(null);
         String result = encryptionService.encrypt(text);
     }
 }
