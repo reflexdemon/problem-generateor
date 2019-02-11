@@ -1,11 +1,14 @@
 package io.vpv.math.problemgenerateor.controller;
 
 import io.vpv.math.problemgenerateor.ProblemGenerateorApplicationTests;
+import io.vpv.math.problemgenerateor.interceptor.SecurityProtection;
+import io.vpv.math.problemgenerateor.model.User;
 import io.vpv.math.problemgenerateor.service.EncryptionService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -17,8 +20,7 @@ import java.nio.charset.StandardCharsets;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class LoginControllerTest extends ProblemGenerateorApplicationTests {
     private static String JSON =
@@ -29,9 +31,14 @@ public class LoginControllerTest extends ProblemGenerateorApplicationTests {
     @Autowired
     private EncryptionService encryptionService;
 
+    private MockHttpSession mockHttpSession;
+
     @Before
     public void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).dispatchOptions(true).build();
+        mockHttpSession = new MockHttpSession(webApplicationContext.getServletContext());
+        User user = getUser();
+        mockHttpSession.setAttribute(SecurityProtection.SESSION_USER, user);
     }
 
     @Test
@@ -59,6 +66,21 @@ public class LoginControllerTest extends ProblemGenerateorApplicationTests {
                         "key", "value1"
                 )))
                 .andExpect(status().is3xxRedirection());
+    }
+
+
+    @Test
+    public void shouldLogoutUserWithSession() throws Exception {
+        mockMvc.perform(post("/logout").session(mockHttpSession))
+                .andExpect(content().string("Signed out"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldLogoutUserWithOutSession() throws Exception {
+        mockMvc.perform(get("/logout"))
+                .andExpect(content().string("Signed out"))
+                .andExpect(status().isOk());
     }
 
 
