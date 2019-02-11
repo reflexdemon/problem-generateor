@@ -7,4 +7,4 @@ logging:
 
 app:
   aeskey: ${SECRET_KEY}
-  callback: "LOCAL_TESTING"
+  callback: ${CALLBACK_ENDPOINT}
