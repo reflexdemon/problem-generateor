@@ -12,7 +12,7 @@ public class SecurityProtection extends HandlerInterceptorAdapter {
     public static final String ASK_SESSION = "https://truelogin.vpv.io/whoisthis?callback=";
 
     @Value("${app.callback}")
-    private String callback = "LOCAL_TESTING";
+    private String callback;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
