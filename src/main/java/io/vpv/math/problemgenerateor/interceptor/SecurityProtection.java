@@ -49,7 +49,6 @@ public class SecurityProtection extends HandlerInterceptorAdapter {
 
     private boolean isSecured(String url) {
         return Stream.of(SECURED_ENDPOINTS)
-                .filter(a -> null != url)
                 .anyMatch(allow -> url.contains(allow));
     }
 
