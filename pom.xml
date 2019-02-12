@@ -120,11 +120,6 @@
 					</goals>
 				</execution>
 			</executions>
-			<configuration>
-				<excludes>
-					<exclude>io.vpv.math.problemgenerateor.ProblemGenerateorApplication</exclude>
-				</excludes>
-			</configuration>
 		</plugin>
 
 		</plugins>
