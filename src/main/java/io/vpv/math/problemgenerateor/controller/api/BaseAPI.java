@@ -1,5 +1,6 @@
 package io.vpv.math.problemgenerateor.controller.api;
 
+import io.vpv.math.problemgenerateor.UserNotAvailableException;
 import io.vpv.math.problemgenerateor.model.ErrorResponse;
 import io.vpv.math.problemgenerateor.service.ProblemGenerator;
 import io.vpv.math.problemgenerateor.util.RandomNumberUtil;
@@ -24,6 +25,14 @@ public class BaseAPI {
     public BaseAPI(final RandomNumberUtil randomNumberUtil, final ProblemGenerator problemGenerator) {
         this.randomNumberUtil = randomNumberUtil;
         this.problemGenerator = problemGenerator;
+    }
+
+    @ExceptionHandler(UserNotAvailableException.class)
+    public ResponseEntity<ErrorResponse> userNotFound(UserNotAvailableException ex) {
+        String errorId = randomNumberUtil.createRandomGUID();
+        logger.error("Exception raised: " + errorId, ex);
+        ErrorResponse response = new ErrorResponse(errorId, ex.getClass().getCanonicalName() + ": " + ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(Exception.class)

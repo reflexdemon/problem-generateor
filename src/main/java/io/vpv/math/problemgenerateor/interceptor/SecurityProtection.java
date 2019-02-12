@@ -20,9 +20,8 @@ public class SecurityProtection extends HandlerInterceptorAdapter {
     /**
      * Enter URL that does not need logged in session.
      */
-    private static final String[] ALLOWED_ENDPOINTS = {
-            "/login",
-            "/logout"
+    private static final String[] SECURED_ENDPOINTS = {
+            "/signin"
     };
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -40,7 +39,7 @@ public class SecurityProtection extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        if (!isAllowed(request.getRequestURL().toString()) && null == request.getSession().getAttribute(SESSION_USER)) {
+        if (isSecured(request.getRequestURL().toString()) && null == request.getSession().getAttribute(SESSION_USER)) {
             String redirectURL = ASK_SESSION + callback;
             response.sendRedirect(redirectURL);
             return false;
@@ -48,12 +47,10 @@ public class SecurityProtection extends HandlerInterceptorAdapter {
         return super.preHandle(request, response, handler);
     }
 
-    private boolean isAllowed(String url) {
-        if (null != url) {
-            return Stream.of(ALLOWED_ENDPOINTS).anyMatch(allow -> url.contains(allow));
-        }
-
-        return false;
+    private boolean isSecured(String url) {
+        return Stream.of(SECURED_ENDPOINTS)
+                .filter(a -> null != url)
+                .anyMatch(allow -> url.contains(allow));
     }
 
 

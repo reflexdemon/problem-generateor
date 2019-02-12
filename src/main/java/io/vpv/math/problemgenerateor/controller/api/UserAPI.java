@@ -1,5 +1,6 @@
 package io.vpv.math.problemgenerateor.controller.api;
 
+import io.vpv.math.problemgenerateor.UserNotAvailableException;
 import io.vpv.math.problemgenerateor.interceptor.SecurityProtection;
 import io.vpv.math.problemgenerateor.model.User;
 import io.vpv.math.problemgenerateor.service.ProblemGenerator;
@@ -27,6 +28,9 @@ public class UserAPI extends BaseAPI {
     @RequestMapping("/user")
     public ResponseEntity<User> getUserFromSession(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute(SecurityProtection.SESSION_USER);
+        if (null == user) {
+            throw new UserNotAvailableException("Unable to find user in session");
+        }
         logger.info("Returning User : {}", user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -33,13 +32,13 @@ public class LoginController {
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String redirect(HttpServletRequest request,
-                           HttpServletResponse response,
                            @RequestParam(required = false) String key,
                            @RequestParam String encryptedToken) {
         try {
             String plainJSON = encryptionService.decrypt(encryptedToken);
             User user = objectMapper.readValue(plainJSON, User.class);
             request.getSession().setAttribute(SecurityProtection.SESSION_USER, user);
+            logger.info("The key returned is {}", key);
         } catch (Exception e) {
             throw new RuntimeException("Problem", e);
         }
@@ -55,5 +54,11 @@ public class LoginController {
         }
         logger.info("Signing Out");
         return new ResponseEntity<>("Signed out", HttpStatus.OK);
+    }
+
+    @RequestMapping("/signin")
+    public String signin() {
+        logger.info("Signing In");
+        return "redirect:/";
     }
 }

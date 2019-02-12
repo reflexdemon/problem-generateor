@@ -52,8 +52,15 @@ public class LoginControllerTest extends ProblemGenerateorApplicationTests {
     }
 
     @Test
+    public void shouldRedirectUserToHomePageWithSession() throws Exception {
+        mockMvc.perform(get("/signin").session(mockHttpSession))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(header().exists("Location"));
+    }
+
+    @Test
     public void shouldRedirectUserToLoginPage() throws Exception {
-        mockMvc.perform(get("/api"))
+        mockMvc.perform(get("/signin"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(header().exists("Location"));
     }

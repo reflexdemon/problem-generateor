@@ -7,7 +7,10 @@
       app
     >
       <v-list dense>
-        <v-list-tile @click="callback" :to="item.to" v-for="item in menu" :key="item.$index">
+        <v-list-tile @click="callback"
+              v-for="item in menu"
+              :key="item.$index"
+              :to="item.to">
           <v-list-tile-action>
             <v-icon>{{item.icon}}</v-icon>
           </v-list-tile-action>
