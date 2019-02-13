@@ -7,9 +7,9 @@
       app
     >
       <v-list dense>
+        <span v-for="item in menu"
+              :key="item.$index">
         <v-list-tile @click="callback"
-              v-for="item in menu"
-              :key="item.$index"
               :to="item.to">
           <v-list-tile-action>
             <v-icon>{{item.icon}}</v-icon>
@@ -18,6 +18,7 @@
             <v-list-tile-title>{{item.label}}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        </span>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left>
@@ -41,7 +42,7 @@
       row
       wrap
     >
-        &copy;{{new Date().getFullYear()}} - <strong> <a href="https://me.vpv.io">Venkateswara VP</a> </strong>
+        &copy; {{new Date().getFullYear()}} - <strong> <a href="https://me.vpv.io">Venkateswara VP</a> </strong>
 
     </v-layout>
   </v-footer>

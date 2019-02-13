@@ -52,6 +52,16 @@ public class LoginControllerTest extends ProblemGenerateorApplicationTests {
     }
 
     @Test
+    public void shouldLoginTheUserToTheApplicationLocal() throws Exception {
+        mockMvc.perform(post("/login")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED).content(buildUrlEncodedFormEntity(
+                        "encryptedToken", encryptionService.encrypt(JSON),
+                        "key", "local"
+                )))
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
     public void shouldRedirectUserToHomePageWithSession() throws Exception {
         mockMvc.perform(get("/signin").session(mockHttpSession))
                 .andExpect(status().is3xxRedirection())

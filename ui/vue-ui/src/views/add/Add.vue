@@ -19,13 +19,13 @@
     <v-flex v-for="r in responses" :key="r.$index"  xs12 md6 lg4>
       <ProblemDisplay :response="r" :timer="timer"/>
     </v-flex>
-              <v-divider ></v-divider>
+              <v-divider></v-divider>
     <v-flex xs12>
       <v-btn color="success" v-on:click="finish" v-if="responses.length">Finish</v-btn>
     </v-flex>
     </v-layout>
     </v-container>
-              <v-divider ></v-divider>
+              <v-divider></v-divider>
     <v-flex xs12>
       <section class="result" v-if="computedResult.total &gt; 0">
       <table border="1" class="results">

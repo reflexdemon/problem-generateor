@@ -3,19 +3,19 @@ module.exports = {
     proxy: {
       '^/api': {
         host: 'localhost',
-        target: 'http://localhost:9090',
+        target: 'https://math.vpv.io',
         ws: true,
         changeOrigin: true,
         headers: {
-          host: 'localhost:8080'
+          host: 'math.vpv.io'
         }
       },
       '/login': {
-        target: 'http://localhost:9090',
+        target: 'https://math.vpv.io',
         host: 'localhost',
         changeOrigin: false,
         headers: {
-          host: 'localhost:8080'
+          host: 'math.vpv.io'
         },
         pathRewrite: {
           '/login': '/login'

@@ -37,8 +37,11 @@ public class LoginController {
         try {
             String plainJSON = encryptionService.decrypt(encryptedToken);
             User user = objectMapper.readValue(plainJSON, User.class);
-            request.getSession().setAttribute(SecurityProtection.SESSION_USER, user);
+            request.getSession(true).setAttribute(SecurityProtection.SESSION_USER, user);
             logger.info("The key returned is {}", key);
+            if (null != key && key.equalsIgnoreCase("local")) {
+                return "redirect:http://localhost:8080/";
+            }
         } catch (Exception e) {
             throw new RuntimeException("Problem", e);
         }
