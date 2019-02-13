@@ -1,4 +1,4 @@
-# Problem Generator [![jdk11](https://img.shields.io/badge/Open%20JDK-11-green.svg)](http://jdk.java.net/11/)[![jdk11](https://img.shields.io/badge/Oracle%20JDK-11-green.svg)](https://www.oracle.com/technetwork/java/javase/downloads/index.html) [![Build Status](https://travis-ci.org/reflexdemon/problem-generateor.svg?branch=master)](https://travis-ci.org/reflexdemon/problem-generateor)
+# Problem Generator [![jdk11](https://img.shields.io/badge/Open%20JDK-11-green.svg)](http://jdk.java.net/11/)[![jdk11](https://img.shields.io/badge/Oracle%20JDK-11-green.svg)](https://www.oracle.com/technetwork/java/javase/11-relnote-issues-5012449.html) [![Build Status](https://travis-ci.org/reflexdemon/problem-generateor.svg?branch=master)](https://travis-ci.org/reflexdemon/problem-generateor)
 
 
 
