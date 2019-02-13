@@ -31,6 +31,17 @@ module.exports = {
         pathRewrite: {
           '/signin': '/signin?key=local'
         }
+      },
+      '/logout': {
+        target: 'https://math.vpv.io',
+        host: 'localhost',
+        changeOrigin: false,
+        headers: {
+          host: 'math.vpv.io'
+        },
+        pathRewrite: {
+          '/logout': '/logout'
+        }
       }
     }
   }

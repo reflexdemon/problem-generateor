@@ -24,6 +24,19 @@
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>VPV Math Puzzles</v-toolbar-title>
+      <v-spacer></v-spacer>
+
+    <v-btn round href="/signin" v-if="!user.id">
+      <v-icon>account_circle</v-icon> Sign in
+    </v-btn>
+    <span v-else>
+      <v-chip close v-model="user.id">
+            <v-avatar>
+              <img :src="user.avatarUrl" :alt="user.firstName">
+            </v-avatar>
+            {{user.firstName}}
+          </v-chip>
+    </span>
     </v-toolbar>
     <v-content>
       <router-view/>
@@ -68,7 +81,17 @@ export default {
       icon: 'info',
       label: 'About'
     }
-    ]
+    ],
+    user : {
+      id: null,
+      username: null,
+      email: null,
+      source: null,
+      firstName: null,
+      lastName: null,
+      avatarUrl: null,
+      profileUrl: null
+    }
   }),
   props: {
     source: String
@@ -77,7 +100,22 @@ export default {
   methods: {
     callback: function () {
 
+    },
+    getUser: function() {
+      fetch('/api/user')
+      .then(response => response.json())
+        .then(data => {
+        console.log('User:', data)
+        if (data && data.id) {
+          this.user = data;
+        }
+      }).catch(function (err) {
+        console.log('User is not available');
+      });
     }
+  },
+  created: function () {
+    this.getUser();
   }
 }
 </script>
