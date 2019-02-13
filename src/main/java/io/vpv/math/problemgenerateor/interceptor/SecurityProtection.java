@@ -38,9 +38,15 @@ public class SecurityProtection extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
         if (isSecured(request.getRequestURL().toString()) && null == request.getSession().getAttribute(SESSION_USER)) {
-            String redirectURL = ASK_SESSION + callback;
+            String redirectURL = "";
+            final String key = request.getParameter("key");
+            if (null != key && key.equalsIgnoreCase("local")) {
+                redirectURL = ASK_SESSION + "LOCAL_TESTING";
+            } else {
+                redirectURL = ASK_SESSION + callback;
+            }
+            redirectURL += "&key=" + key;
             response.sendRedirect(redirectURL);
             return false;
         }

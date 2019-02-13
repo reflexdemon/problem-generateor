@@ -20,6 +20,17 @@ module.exports = {
         pathRewrite: {
           '/login': '/login'
         }
+      },
+      '/signin': {
+        target: 'https://math.vpv.io',
+        host: 'localhost',
+        changeOrigin: false,
+        headers: {
+          host: 'math.vpv.io'
+        },
+        pathRewrite: {
+          '/signin': '/signin?key=local'
+        }
       }
     }
   }

@@ -10,6 +10,7 @@ import org.junit.Test;
 public class MainTest {
     @Test
     public void main() {
+        System.setProperty("server.port", "8181");
         ProblemGenerateorApplication.main(new String[]{});
     }
 }
