@@ -60,8 +60,11 @@ public class LoginController {
     }
 
     @RequestMapping("/signin")
-    public String signin() {
+    public String signin(@RequestParam(required = false) String key) {
         logger.info("Signing In");
+        if (null != key && key.equalsIgnoreCase("local")) {
+            return "redirect:http://localhost:8080/";
+        }
         return "redirect:/";
     }
 }

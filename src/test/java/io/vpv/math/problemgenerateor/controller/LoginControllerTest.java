@@ -68,7 +68,12 @@ public class LoginControllerTest extends ProblemGenerateorApplicationTests {
                 .andExpect(header().exists("Location"));
     }
 
-
+    @Test
+    public void shouldRedirectUserToHomePageWithKeyAndSession() throws Exception {
+        mockMvc.perform(get("/signin?key=local").session(mockHttpSession))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(header().exists("Location"));
+    }
     @Test
     public void shouldRedirectUserToHomePageWithKey() throws Exception {
         mockMvc.perform(get("/signin?key=local"))
