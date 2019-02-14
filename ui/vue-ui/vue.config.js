@@ -28,8 +28,11 @@ module.exports = {
         headers: {
           host: 'math.vpv.io'
         },
-        pathRewrite: {
-          '/signin': '/signin?key=local'
+        logLevel: 'debug',
+        pathRewrite: function (path, req) {
+          let resultPath = path + '?key=local'
+          console.log('Path returned', resultPath)
+          return resultPath
         }
       },
       '/logout': {
@@ -39,8 +42,10 @@ module.exports = {
         headers: {
           host: 'math.vpv.io'
         },
-        pathRewrite: {
-          '/logout': '/logout'
+        pathRewrite: function (path, req) {
+          let resultPath = path + '?key=local'
+          console.log('Path returned', resultPath)
+          return resultPath
         }
       }
     }

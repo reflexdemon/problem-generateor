@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Add from './views/add/Add.vue'
+import Add from './views/operations/Add.vue'
+import Sub from './views/operations/Sub.vue'
+import Mul from './views/operations/Mul.vue'
+import Div from './views/operations/Div.vue'
 
 Vue.use(Router)
 
@@ -17,6 +20,21 @@ export default new Router({
       path: '/add',
       name: 'add',
       component: Add
+    },
+    {
+      path: '/sub',
+      name: 'subtract',
+      component: Sub
+    },
+    {
+      path: '/mul',
+      name: 'multiply',
+      component: Mul
+    },
+    {
+      path: '/div',
+      name: 'divide',
+      component: Div
     },
     {
       path: '/about',

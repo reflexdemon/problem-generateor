@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire" dark>
+  <v-app id="inspire" :dark="theme">
     <v-navigation-drawer
       v-model="drawer"
       clipped
@@ -9,14 +9,21 @@
       <v-list dense>
         <span v-for="item in menu"
               :key="item.$index">
-        <v-list-tile @click="callback"
-              :to="item.to">
+        <v-list-tile @click="callback" v-if="item.to" :to="item.to">
           <v-list-tile-action>
             <v-icon>{{item.icon}}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>{{item.label}}</v-list-tile-title>
-          </v-list-tile-content>
+            </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="callback" v-else :href="item.href" :target="target">
+          <v-list-tile-action>
+            <v-icon>{{item.icon}}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{item.label}}</v-list-tile-title>
+            </v-list-tile-content>
         </v-list-tile>
         </span>
       </v-list>
@@ -25,15 +32,20 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>VPV Math Puzzles</v-toolbar-title>
       <v-spacer></v-spacer>
-
+<v-btn-toggle v-model="theme">
+        <v-btn :value="true" flat>
+          <v-icon>toggle_on</v-icon>
+        </v-btn>
+       </v-btn-toggle>
     <v-btn round href="/signin" v-if="!user.id">
       <v-icon>account_circle</v-icon> Sign in
     </v-btn>
     <span v-else>
-      <v-chip close v-model="user.id">
-            <v-avatar>
+      <v-chip close v-model="chip">
+            <v-avatar v-if="user.avatarUrl">
               <img :src="user.avatarUrl" :alt="user.firstName">
             </v-avatar>
+            <v-icon v-else color="green">account_circle</v-icon>
             {{user.firstName}}
           </v-chip>
     </span>
@@ -66,7 +78,19 @@
 export default {
   data: () => ({
     drawer: null,
-    menu: [ {
+    chip: true,
+    theme: true,
+    signOutMenuItem: {
+      href: '/logout',
+      icon: 'account_circle',
+      label: 'Sign Out'
+    },
+    signInMenuItem: {
+      href: '/signin',
+      icon: 'account_circle',
+      label: 'Sign In'
+    },
+    mainmenu: [ {
       to: '/',
       icon: 'home',
       label: 'Home'
@@ -74,15 +98,37 @@ export default {
     {
       to: '/add',
       icon: 'add',
-      label: 'Add'
+      label: 'Addition'
+    },
+    {
+      to: '/sub',
+      icon: 'remove',
+      label: 'Subtract'
+    },
+    {
+      to: '/mul',
+      icon: 'clear',
+      label: 'Multiply'
+    },
+    {
+      to: '/div',
+      icon: 'share',
+      label: 'Divide'
     },
     {
       to: '/about',
       icon: 'info',
       label: 'About'
+    },
+    {
+      href: 'https://github.com/reflexdemon/problem-generateor',
+      icon: 'link',
+      label: 'Source Code',
+      target: '_blank'
     }
     ],
-    user : {
+    menu: [],
+    user: {
       id: null,
       username: null,
       email: null,
@@ -101,21 +147,31 @@ export default {
     callback: function () {
 
     },
-    getUser: function() {
+    getUser: function () {
       fetch('/api/user')
-      .then(response => response.json())
+        .then(response => response.json())
         .then(data => {
-        console.log('User:', data)
-        if (data && data.id) {
-          this.user = data;
-        }
-      }).catch(function (err) {
-        console.log('User is not available');
-      });
+          console.log('User:', data)
+          if (data && data.id) {
+            this.user = data
+          }
+          this.buildMenu()
+        }).catch(function (err) {
+          console.log('User is not available', err)
+          this.buildMenu()
+        })
+    },
+    buildMenu: function () {
+      this.mainmenu.forEach(item => this.menu.push(item))
+      if (this.user.id) {
+        this.menu.push(this.signOutMenuItem)
+      } else {
+        this.menu.push(this.signInMenuItem)
+      }
     }
   },
   created: function () {
-    this.getUser();
+    this.getUser()
   }
 }
 </script>
