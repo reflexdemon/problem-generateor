@@ -10,7 +10,7 @@
 
 ## Live Demo
 
-To view the live demo of the cod please visit: https://math.vpv.io
+To view the live demo of the code please visit: https://math.vpv.io
 
 ## Code Coverage Graphs
 
