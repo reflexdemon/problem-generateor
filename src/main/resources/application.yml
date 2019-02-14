@@ -6,5 +6,7 @@ logging:
           springframework:
 
 app:
+  askLogin: "https://truelogin.vpv.io/whoisthis?callback="
+  localEndpoint: "http://localhost:8080/"
   aeskey: ${SECRET_KEY}
   callback: ${CALLBACK_ENDPOINT}

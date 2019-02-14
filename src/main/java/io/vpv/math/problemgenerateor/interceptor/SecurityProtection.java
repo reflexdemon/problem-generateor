@@ -1,7 +1,9 @@
 package io.vpv.math.problemgenerateor.interceptor;
 
+import io.vpv.math.problemgenerateor.util.AppUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -11,18 +13,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.stream.Stream;
 
+import static io.vpv.math.problemgenerateor.util.AppUtil.LOCAL_TESTING;
+
 @Component
 public class SecurityProtection extends HandlerInterceptorAdapter {
 
     public static final String SESSION_USER = "SESSION_USER";
-    public static final String ASK_SESSION = "https://truelogin.vpv.io/whoisthis?callback=";
-
     /**
      * Enter URL that does not need logged in session.
      */
     private static final String[] SECURED_ENDPOINTS = {
             "/signin"
     };
+    @Value("${app.askLogin}")
+    private String askLogin;
+    @Autowired
+    private AppUtil appUtil;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Value("${app.callback}")
@@ -39,12 +45,12 @@ public class SecurityProtection extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (isSecured(request.getRequestURL().toString()) && null == request.getSession().getAttribute(SESSION_USER)) {
-            String redirectURL = "";
+            String redirectURL;
             final String key = request.getParameter("key");
-            if (null != key && key.equalsIgnoreCase("local")) {
-                redirectURL = ASK_SESSION + "LOCAL_TESTING";
+            if (appUtil.isLocal(key)) {
+                redirectURL = askLogin + LOCAL_TESTING;
             } else {
-                redirectURL = ASK_SESSION + callback;
+                redirectURL = askLogin + callback;
             }
             redirectURL += "&key=" + key;
             response.sendRedirect(redirectURL);

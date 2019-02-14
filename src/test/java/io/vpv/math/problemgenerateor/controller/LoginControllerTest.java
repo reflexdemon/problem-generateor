@@ -20,7 +20,8 @@ import java.nio.charset.StandardCharsets;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class LoginControllerTest extends ProblemGenerateorApplicationTests {
     private static String JSON =
@@ -102,15 +103,13 @@ public class LoginControllerTest extends ProblemGenerateorApplicationTests {
     @Test
     public void shouldLogoutUserWithSession() throws Exception {
         mockMvc.perform(post("/logout").session(mockHttpSession))
-                .andExpect(content().string("Signed out"))
-                .andExpect(status().isOk());
+                .andExpect(status().is3xxRedirection());
     }
 
     @Test
     public void shouldLogoutUserWithOutSession() throws Exception {
         mockMvc.perform(get("/logout"))
-                .andExpect(content().string("Signed out"))
-                .andExpect(status().isOk());
+                .andExpect(status().is3xxRedirection());
     }
 
 

@@ -4,11 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vpv.math.problemgenerateor.interceptor.SecurityProtection;
 import io.vpv.math.problemgenerateor.model.User;
 import io.vpv.math.problemgenerateor.service.EncryptionService;
+import io.vpv.math.problemgenerateor.util.AppUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,12 +22,16 @@ public class LoginController {
 
     private EncryptionService encryptionService;
     private ObjectMapper objectMapper;
+    private AppUtil appUtil;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Value("${app.localEndpoint}")
+    private String localEndpoint;
 
     @Autowired
-    public LoginController(EncryptionService encryptionService, ObjectMapper objectMapper) {
+    public LoginController(EncryptionService encryptionService, ObjectMapper objectMapper, AppUtil appUtil) {
         this.encryptionService = encryptionService;
         this.objectMapper = objectMapper;
+        this.appUtil = appUtil;
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
@@ -39,32 +43,33 @@ public class LoginController {
             User user = objectMapper.readValue(plainJSON, User.class);
             request.getSession(true).setAttribute(SecurityProtection.SESSION_USER, user);
             logger.info("The key returned is {}", key);
-            if (null != key && key.equalsIgnoreCase("local")) {
-                return "redirect:http://localhost:8080/";
-            }
         } catch (Exception e) {
             throw new RuntimeException("Problem", e);
         }
-        return "redirect:/";
+        return getCorrectRedirectionEndpoint(key);
 
     }
 
     @RequestMapping("/logout")
-    public ResponseEntity<String> signOutUser(HttpServletRequest request) {
+    public String signOutUser(HttpServletRequest request, @RequestParam(required = false) String key) {
         HttpSession session = request.getSession(false);
+        logger.info("Signing Out");
         if (null != session) {
             session.removeAttribute(SecurityProtection.SESSION_USER);
         }
-        logger.info("Signing Out");
-        return new ResponseEntity<>("Signed out", HttpStatus.OK);
+        return getCorrectRedirectionEndpoint(key);
+    }
+
+    private String getCorrectRedirectionEndpoint(final String key) {
+        if (appUtil.isLocal(key)) {
+            return "redirect:" + localEndpoint;
+        }
+        return "redirect:/";
     }
 
     @RequestMapping("/signin")
     public String signin(@RequestParam(required = false) String key) {
         logger.info("Signing In");
-        if (null != key && key.equalsIgnoreCase("local")) {
-            return "redirect:http://localhost:8080/";
-        }
-        return "redirect:/";
+        return getCorrectRedirectionEndpoint(key);
     }
 }
