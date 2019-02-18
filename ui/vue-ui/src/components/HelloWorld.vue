@@ -84,24 +84,27 @@
   </v-container>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    ecosystem: [
-      {
-        text: 'vuetify-loader',
-        href: 'https://github.com/vuetifyjs/vuetify-loader'
-      },
-      {
-        text: 'github',
-        href: 'https://github.com/vuetifyjs/vuetify'
-      },
-      {
-        text: 'awesome-vuetify',
-        href: 'https://github.com/vuetifyjs/awesome-vuetify'
-      }
-    ],
-    importantLinks: [
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+@Component
+export default class HelloWorld extends Vue {
+  ecosystem = [
+    {
+      text: 'vuetify-loader',
+      href: 'https://github.com/vuetifyjs/vuetify-loader'
+    },
+    {
+      text: 'github',
+      href: 'https://github.com/vuetifyjs/vuetify'
+    },
+    {
+      text: 'awesome-vuetify',
+      href: 'https://github.com/vuetifyjs/awesome-vuetify'
+    }
+  ]
+    importantLinks = [
       {
         text: 'Documentation',
         href: 'https://vuetifyjs.com'
@@ -122,8 +125,8 @@ export default {
         text: 'Articles',
         href: 'https://medium.com/vuetify'
       }
-    ],
-    whatsNext: [
+    ]
+    whatsNext = [
       {
         text: 'Explore components',
         href: 'https://vuetifyjs.com/components/api-explorer'
@@ -138,10 +141,7 @@ export default {
       }
 
     ]
-  })
 }
 </script>
-
-<style>
-
+<style scoped>
 </style>

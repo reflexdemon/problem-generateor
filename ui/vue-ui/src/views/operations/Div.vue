@@ -2,25 +2,25 @@
   <ProblemTemplate title="Division Problems" :operation="operation"/>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
 import ProblemTemplate from '@/components/ProblemTemplate.vue'
 
-export default {
-  name: 'divide',
+@Component({
   components: {
     ProblemTemplate
-  },
-  data: function () {
-    return {
-      operation: {
-        name: 'div',
-        size: 10,
-        min: 2,
-        max: 10,
-        duration: 2
-      }
-    }
   }
+})
+export default class Divide extends Vue {
+  operation = {
+    name: 'div',
+    size: 10,
+    min: 2,
+    max: 10,
+    duration: 2
+  };
 }
 </script>
 <style scoped>
