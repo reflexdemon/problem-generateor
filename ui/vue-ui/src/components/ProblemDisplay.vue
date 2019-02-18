@@ -3,11 +3,11 @@
     <v-card>
 <v-card-text >
   <v-badge> {{timer}} </v-badge>
-<div class="display-4 text-xs-right">{{response.firstNumber}}</div>
-<div class="display-4 text-xs-right">{{response.operator}} {{response.secondNumber}}</div>
+<div class="display-3 text-xs-right">{{response.firstNumber}}</div>
+<div class="display-3 text-xs-right">{{response.operator}} {{response.secondNumber}}</div>
 </v-card-text>
   <v-card-actions>
-    <v-text-field id="styled-input" height="120" type="number" name="answer" v-model="response.result"  autocomplete="off"/>
+    <v-text-field reverse class="styled-input" height="120" type="number" name="answer" v-model="response.result"  autocomplete="off"/>
   </v-card-actions>
   <v-btn
               color="green"
@@ -25,49 +25,38 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'ProblemDisplay',
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+@Component({
   props: {
-    response: {
-      firstNumber: Number,
-      secondNumber: Number,
-      answer: Number,
-      result: Number,
-      operator: String
-    },
+    response: Object,
     timer: String
   }
+})
+export default class ProblemDisplay extends Vue {
+  sampleStructureForResponse = {
+    firstNumber: Number,
+    secondNumber: Number,
+    answer: Number,
+    result: Number,
+    operator: String
+  };
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-#styled-input {
-    font-size: 112px !important;
-    font-weight: 300;
+.styled-input {
+     font-size:40px;
+  /* position:absolute; */
+  width:100%;
+  top:50%;
+  -webkit-transform:translateY(-50%);
+  left:0;
+  outline:none;
 }
 
-.problem {
-  display: inline-block;
-  height:300px;
-  background-color: #aaa;
-  padding: 20px;
-  text-align: right;
-  font-size: 70px;
-  margin-right: 10%;
-  border: 2px solid #908b85;
-  border-radius: 20px;
-  box-shadow:
-    7px 10px 34px 1px
-    rgba(0, 0, 0, 0.68),
-    inset -1px -6px 12px 0.1px
-    #89847e;
-}
-input {
-    font-size: 70px;
-    text-align: right;
-    width: 100%;
-}
 </style>

@@ -17,7 +17,7 @@
             <v-list-tile-title>{{item.label}}</v-list-tile-title>
             </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="callback" v-else :href="item.href" :target="target">
+        <v-list-tile @click="callback" v-else :href="item.href" :target="item.target">
           <v-list-tile-action>
             <v-icon>{{item.icon}}</v-icon>
           </v-list-tile-action>

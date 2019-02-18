@@ -1,26 +1,25 @@
 <template>
   <ProblemTemplate title="Subtraction Problems" :operation="operation"/>
 </template>
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
-<script>
 import ProblemTemplate from '@/components/ProblemTemplate.vue'
 
-export default {
-  name: 'subtract',
+@Component({
   components: {
     ProblemTemplate
-  },
-  data: function () {
-    return {
-      operation: {
-        name: 'sub',
-        size: 10,
-        min: 10,
-        max: 99,
-        duration: 2
-      }
-    }
   }
+})
+export default class Subtraction extends Vue {
+  operation = {
+    name: 'sub',
+    size: 10,
+    min: 10,
+    max: 99,
+    duration: 2
+  };
 }
 </script>
 <style scoped>

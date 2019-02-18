@@ -32,40 +32,38 @@
     </v-card>
   </div>
 </template>
-<script>
-export default {
-  name: 'UserInput',
-  data: function () {
-    return {
-      input: {
-        size: this.size,
-        min: this.min,
-        max: this.max,
-        duration: this.duration
-      }
-    }
-  },
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+@Component({
   props: {
     size: Number,
     min: Number,
     max: Number,
     duration: Number,
     title: String
-  },
-  methods: {
-    activateTimer: function () {
-      console.log('Emmiting activate-timer event')
-      this.$emit(
-        'activate-timer',
-        this.input.size,
-        this.input.min,
-        this.input.max,
-        this.input.duration
-      )
-    }
   }
+})
+export default class UserInput extends Vue {
+input:any = {
+  size: this.size,
+  min: this.min,
+  max: this.max,
+  duration: this.duration
 }
 
+activateTimer () {
+  console.log('Emmiting activate-timer event')
+  this.$emit(
+    'activate-timer',
+    this.input.size,
+    this.input.min,
+    this.input.max,
+    this.input.duration
+  )
+}
+}
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
