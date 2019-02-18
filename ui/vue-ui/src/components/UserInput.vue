@@ -36,7 +36,10 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-@Component({
+// We declare the props separately
+// to make props types inferable.
+// https://github.com/vuejs/vue-class-component/blob/master/example/src/App.vue#L29-L35
+const UserInputProps = Vue.extend({
   props: {
     size: Number,
     min: Number,
@@ -45,7 +48,8 @@ import Component from 'vue-class-component'
     title: String
   }
 })
-export default class UserInput extends Vue {
+@Component
+export default class UserInput extends UserInputProps {
 input:any = {
   size: this.size,
   min: this.min,

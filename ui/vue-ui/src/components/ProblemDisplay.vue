@@ -28,14 +28,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-
-@Component({
+const ProblemDisplayProps = Vue.extend({
   props: {
     response: Object,
     timer: String
   }
 })
-export default class ProblemDisplay extends Vue {
+@Component
+export default class ProblemDisplay extends ProblemDisplayProps {
   sampleStructureForResponse = {
     firstNumber: Number,
     secondNumber: Number,
