@@ -11,15 +11,17 @@
               :key="item.$index">
         <v-list-tile @click="callback" v-if="item.to" :to="item.to">
           <v-list-tile-action>
-            <v-icon>{{item.icon}}</v-icon>
+          <font-awesome-icon v-if="item.iconType === 'fas'" :icon="item.icon"/>
+            <v-icon v-else>{{item.icon}}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>{{item.label}}</v-list-tile-title>
             </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="callback" v-else :href="item.href" :target="target">
+        <v-list-tile @click="callback" v-else :href="item.href" :target="item.target">
           <v-list-tile-action>
-            <v-icon>{{item.icon}}</v-icon>
+          <font-awesome-icon v-if="item.iconType === 'fas'" :icon="item.icon"/>
+            <v-icon v-else>{{item.icon}}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>{{item.label}}</v-list-tile-title>
@@ -75,7 +77,12 @@
 </template>
 
 <script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 export default {
+  components: {
+    FontAwesomeIcon
+  },
   data: () => ({
     drawer: null,
     chip: true,
@@ -122,7 +129,8 @@ export default {
     },
     {
       href: 'https://github.com/reflexdemon/problem-generateor',
-      icon: 'link',
+      iconType: 'fab',
+      icon: faSpinner,
       label: 'Source Code',
       target: '_blank'
     }
