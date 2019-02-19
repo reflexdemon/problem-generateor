@@ -99,44 +99,44 @@ export default class App extends AppProps {
     icon: 'account_circle',
     label: 'Sign In'
   };
-  mainmenu =  [ {
-                  to: '/',
-                  icon: 'home',
-                  label: 'Home'
-                },
-                {
-                  to: '/add',
-                  icon: 'add',
-                  label: 'Addition'
-                },
-                {
-                  to: '/sub',
-                  icon: 'remove',
-                  label: 'Subtract'
-                },
-                {
-                  to: '/mul',
-                  icon: 'clear',
-                  label: 'Multiply'
-                },
-                {
-                  to: '/div',
-                  icon: 'share',
-                  label: 'Divide'
-                },
-                {
-                  to: '/about',
-                  icon: 'info',
-                  label: 'About'
-                },
-                {
-                  href: 'https://github.com/reflexdemon/problem-generateor',
-                  icon: 'link',
-                  label: 'Source Code',
-                  target: '_blank'
-                }
-              ];
-  menu:any =  [];
+  mainmenu = [ {
+    to: '/',
+    icon: 'home',
+    label: 'Home'
+  },
+  {
+    to: '/add',
+    icon: 'add',
+    label: 'Addition'
+  },
+  {
+    to: '/sub',
+    icon: 'remove',
+    label: 'Subtract'
+  },
+  {
+    to: '/mul',
+    icon: 'clear',
+    label: 'Multiply'
+  },
+  {
+    to: '/div',
+    icon: 'share',
+    label: 'Divide'
+  },
+  {
+    to: '/about',
+    icon: 'info',
+    label: 'About'
+  },
+  {
+    href: 'https://github.com/reflexdemon/problem-generateor',
+    icon: 'link',
+    label: 'Source Code',
+    target: '_blank'
+  }
+  ];
+  menu:any = [];
   user = {
     id: null,
     username: null,
@@ -148,7 +148,7 @@ export default class App extends AppProps {
     profileUrl: null
   };
 
-  created() {
+  created () {
     this.getUser()
   }
 
@@ -166,20 +166,21 @@ export default class App extends AppProps {
   getUser () {
     fetch('/api/user')
       .then(response => response.json())
-      .then(data => {
-        console.log('User:', data)
-        if (data && data.id) {
-          this.user = data
-        }
-        this.buildMenu()
-      }).catch(function (err) {
-        console.log('User is not available', err)
-        this.buildMenu()
-      })
+      .then(this.onUserInfo.bind(this))
+      .catch(this.errorHandler.bind(this))
   }
 
+  onUserInfo (data:any) {
+    console.log('User:', data)
+    if (data && data.id) {
+      this.user = data
+    }
+    this.buildMenu()
+  }
 
-
+  errorHandler (err:any) {
+    console.log('User is not available', err)
+    this.buildMenu()
+  }
 }
 </script>
-
