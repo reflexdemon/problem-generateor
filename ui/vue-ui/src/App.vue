@@ -74,104 +74,112 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    drawer: null,
-    chip: true,
-    theme: true,
-    signOutMenuItem: {
-      href: '/logout',
-      icon: 'account_circle',
-      label: 'Sign Out'
-    },
-    signInMenuItem: {
-      href: '/signin',
-      icon: 'account_circle',
-      label: 'Sign In'
-    },
-    mainmenu: [ {
-      to: '/',
-      icon: 'home',
-      label: 'Home'
-    },
-    {
-      to: '/add',
-      icon: 'add',
-      label: 'Addition'
-    },
-    {
-      to: '/sub',
-      icon: 'remove',
-      label: 'Subtract'
-    },
-    {
-      to: '/mul',
-      icon: 'clear',
-      label: 'Multiply'
-    },
-    {
-      to: '/div',
-      icon: 'share',
-      label: 'Divide'
-    },
-    {
-      to: '/about',
-      icon: 'info',
-      label: 'About'
-    },
-    {
-      href: 'https://github.com/reflexdemon/problem-generateor',
-      icon: 'link',
-      label: 'Source Code',
-      target: '_blank'
-    }
-    ],
-    menu: [],
-    user: {
-      id: null,
-      username: null,
-      email: null,
-      source: null,
-      firstName: null,
-      lastName: null,
-      avatarUrl: null,
-      profileUrl: null
-    }
-  }),
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+const AppProps = Vue.extend({
   props: {
     source: String
-  },
+  }
+})
 
-  methods: {
-    callback: function () {
+@Component
+export default class App extends AppProps {
+  drawer= null;
+  chip=true;
+  theme=true;
+  signOutMenuItem = {
+    href: '/logout',
+    icon: 'account_circle',
+    label: 'Sign Out'
+  };
+  signInMenuItem = {
+    href: '/signin',
+    icon: 'account_circle',
+    label: 'Sign In'
+  };
+  mainmenu =  [ {
+                  to: '/',
+                  icon: 'home',
+                  label: 'Home'
+                },
+                {
+                  to: '/add',
+                  icon: 'add',
+                  label: 'Addition'
+                },
+                {
+                  to: '/sub',
+                  icon: 'remove',
+                  label: 'Subtract'
+                },
+                {
+                  to: '/mul',
+                  icon: 'clear',
+                  label: 'Multiply'
+                },
+                {
+                  to: '/div',
+                  icon: 'share',
+                  label: 'Divide'
+                },
+                {
+                  to: '/about',
+                  icon: 'info',
+                  label: 'About'
+                },
+                {
+                  href: 'https://github.com/reflexdemon/problem-generateor',
+                  icon: 'link',
+                  label: 'Source Code',
+                  target: '_blank'
+                }
+              ];
+  menu:any =  [];
+  user = {
+    id: null,
+    username: null,
+    email: null,
+    source: null,
+    firstName: null,
+    lastName: null,
+    avatarUrl: null,
+    profileUrl: null
+  };
 
-    },
-    getUser: function () {
-      fetch('/api/user')
-        .then(response => response.json())
-        .then(data => {
-          console.log('User:', data)
-          if (data && data.id) {
-            this.user = data
-          }
-          this.buildMenu()
-        }).catch(function (err) {
-          console.log('User is not available', err)
-          this.buildMenu()
-        })
-    },
-    buildMenu: function () {
-      this.mainmenu.forEach(item => this.menu.push(item))
-      if (this.user.id) {
-        this.menu.push(this.signOutMenuItem)
-      } else {
-        this.menu.push(this.signInMenuItem)
-      }
-    }
-  },
-  created: function () {
+  created() {
     this.getUser()
   }
+
+  callback () {
+
+  }
+  buildMenu () {
+    this.mainmenu.forEach(item => this.menu.push(item))
+    if (this.user.id) {
+      this.menu.push(this.signOutMenuItem)
+    } else {
+      this.menu.push(this.signInMenuItem)
+    }
+  }
+  getUser () {
+    fetch('/api/user')
+      .then(response => response.json())
+      .then(data => {
+        console.log('User:', data)
+        if (data && data.id) {
+          this.user = data
+        }
+        this.buildMenu()
+      }).catch(function (err) {
+        console.log('User is not available', err)
+        this.buildMenu()
+      })
+  }
+
+
+
 }
 </script>
+
