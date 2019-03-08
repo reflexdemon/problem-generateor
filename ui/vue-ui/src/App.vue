@@ -125,6 +125,11 @@ export default class App extends AppProps {
     label: 'Divide'
   },
   {
+    to: '/addsub',
+    icon: 'add',
+    label: 'Add Sub'
+  },
+  {
     to: '/about',
     icon: 'info',
     label: 'About'

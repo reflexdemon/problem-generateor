@@ -5,6 +5,7 @@ import Add from './views/operations/Add.vue'
 import Sub from './views/operations/Sub.vue'
 import Mul from './views/operations/Mul.vue'
 import Div from './views/operations/Div.vue'
+import AddSub from './views/operations/AddSub.vue'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/div',
       name: 'divide',
       component: Div
+    },
+    {
+      path: '/addsub',
+      name: 'addsub',
+      component: AddSub
     },
     {
       path: '/about',

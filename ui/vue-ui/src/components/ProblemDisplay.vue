@@ -9,7 +9,7 @@
   <v-card-actions>
     <v-text-field reverse class="styled-input" height="120" type="number" name="answer" v-model="response.result"  autocomplete="off"/>
   </v-card-actions>
-  <v-btn
+  <!-- <v-btn
               color="green"
               dark
               small
@@ -20,7 +20,7 @@
               @click="$vuetify.goTo(0)"
             >
               <v-icon>arrow_upward</v-icon>
-            </v-btn>
+            </v-btn> -->
 </v-card>
   </div>
 </template>

@@ -21,7 +21,7 @@
     </v-flex>
               <v-divider></v-divider>
     <v-flex xs12>
-      <v-btn color="success" v-on:click="finish" v-if="responses.length">Finish</v-btn>
+      <v-btn color="success" v-on:click="finish()" v-if="responses.length">Finish</v-btn>
     </v-flex>
     </v-layout>
     </v-container>
@@ -133,6 +133,7 @@ export default {
             this.computedResult.score = (100.0 * this.computedResult.correctAnswers / handler.length)
           }
         })
+        console.log('this.computedResult.correctAnswers', this.computedResult.correctAnswers)
       }
     },
     initTimer: function () {
