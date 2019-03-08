@@ -53,6 +53,15 @@ public class ProblemGeneratorAPITest extends ProblemGenerateorApplicationTests {
     }
 
     @Test
+    public void getAddSubProblems() throws Exception {
+        mockMvc.perform(get("/api/addsub").session(mockHttpSession))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$[0].firstNumber").isNotEmpty());
+    }
+
+
+    @Test
     public void getMulProblems() throws Exception {
         mockMvc.perform(get("/api/mul").session(mockHttpSession))
                 .andExpect(status().isOk())

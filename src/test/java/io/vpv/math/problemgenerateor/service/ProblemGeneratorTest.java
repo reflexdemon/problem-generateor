@@ -36,4 +36,16 @@ public class ProblemGeneratorTest extends ProblemGenerateorApplicationTests {
         Assert.assertNotNull("The result is not empty, ", subProblems);
         assertEquals("The length is matching", subProblems.size(), length);
     }
+
+
+    @Test
+    public void shouldGenerateRandomProblems() {
+        int length = 10;
+        int lowerBound = 10;
+        int upperBound = 100;
+        List<ProblemStatement> subProblems = problemGenerator.shuffleAddAndSubtract(length, lowerBound, upperBound);
+        System.out.println("subProblems:" + subProblems);
+        Assert.assertNotNull("The result is not empty, ", subProblems);
+        assertEquals("The length is matching", subProblems.size(), length);
+    }
 }

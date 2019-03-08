@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
@@ -16,6 +17,7 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class ProblemGenerator {
 
+    private static final Random RANDOMIZER = new Random(2);
     private AdditionProblemService additionProblemService;
 
     private SubtractionProblemService subtractionProblemService;
@@ -54,6 +56,22 @@ public class ProblemGenerator {
         return IntStream.range(0, length)
                 .mapToObj(i -> divisionProblemService.generateProblemStatement(lowerBound, upperBound))
                 .collect(toList());
+    }
+
+    public List<ProblemStatement> shuffleAddAndSubtract(final int length, int lowerBound, int upperBound) {
+        return IntStream.range(0, length)
+                .mapToObj(i -> getRandomProblemStatement(lowerBound, upperBound))
+                .collect(toList());
+    }
+
+    private ProblemStatement getRandomProblemStatement(final int lowerBound, final int upperBound) {
+
+        if (RANDOMIZER.nextInt() > 1) {
+            return additionProblemService.generateProblemStatement(lowerBound, upperBound);
+        } else {
+            return subtractionProblemService.generateProblemStatement(lowerBound, upperBound);
+        }
+
     }
 
 }

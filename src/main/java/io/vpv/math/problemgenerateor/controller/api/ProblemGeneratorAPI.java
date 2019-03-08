@@ -23,7 +23,7 @@ public class ProblemGeneratorAPI extends BaseAPI {
     private final Logger logger = getLogger(this.getClass());
 
 
-    private static final String[] API_ENDPOINTS = {"/add", "/sub", "/mul", "/div"};
+    private static final String[] API_ENDPOINTS = {"/add", "/sub", "/mul", "/div", "/addsub"};
 
     @Autowired
     public ProblemGeneratorAPI(final RandomNumberUtil randomNumberUtil, final ProblemGenerator problemGenerator) {
@@ -73,6 +73,16 @@ public class ProblemGeneratorAPI extends BaseAPI {
                                                                  @RequestParam(required = false, defaultValue = "10") final String max
     ) {
         List<ProblemStatement> problems = problemGenerator.getDivProblems(parseInt(size), parseInt(min), parseInt(max));
+        logger.debug("Problems:" + problems);
+        return new ResponseEntity<>(problems, HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/addsub", method = GET)
+    public ResponseEntity<List<ProblemStatement>> shuffleAddAndSubtract(@RequestParam(required = false, defaultValue = "10") final String size,
+                                                                        @RequestParam(required = false, defaultValue = "2") final String min,
+                                                                        @RequestParam(required = false, defaultValue = "10") final String max
+    ) {
+        List<ProblemStatement> problems = problemGenerator.shuffleAddAndSubtract(parseInt(size), parseInt(min), parseInt(max));
         logger.debug("Problems:" + problems);
         return new ResponseEntity<>(problems, HttpStatus.OK);
     }
