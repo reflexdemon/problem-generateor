@@ -6,6 +6,7 @@ import Sub from './views/operations/Sub.vue'
 import Mul from './views/operations/Mul.vue'
 import Div from './views/operations/Div.vue'
 import AddSub from './views/operations/AddSub.vue'
+import Printable from './views/printables/Printable.vue'
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
       path: '/addsub',
       name: 'addsub',
       component: AddSub
+    },
+    {
+      path: '/print',
+      name: 'print',
+      component: Printable
     },
     {
       path: '/about',

@@ -18,10 +18,11 @@
   },
   "devDependencies": {
     "@types/jest": "^23.1.4",
+    "@types/lodash": "^4.14.123",
     "@vue/cli-plugin-babel": "^3.3.0",
     "@vue/cli-plugin-eslint": "^3.3.0",
     "@vue/cli-plugin-typescript": "^3.4.0",
-    "@vue/cli-plugin-unit-jest": "^3.3.0",
+    "@vue/cli-plugin-unit-jest": "^3.4.1",
     "@vue/cli-service": "^3.3.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/eslint-config-typescript": "^3.2.0",

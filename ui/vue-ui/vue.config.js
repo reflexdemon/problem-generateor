@@ -24,6 +24,51 @@ module.exports = {
           '/login': '/login'
         }
       },
+      '/swagger-ui.html': {
+        target: 'https://math.vpv.io',
+        host: 'localhost',
+        changeOrigin: false,
+        headers: {
+          host: 'math.vpv.io'
+        },
+        pathRewrite: {
+          '/swagger-ui.html': '/swagger-ui.html'
+        }
+      },
+      '/webjars': {
+        target: 'https://math.vpv.io',
+        host: 'localhost',
+        changeOrigin: false,
+        headers: {
+          host: 'math.vpv.io'
+        },
+        pathRewrite: {
+          '/webjars': '/webjars'
+        }
+      },
+      '/swagger-resources': {
+        target: 'https://math.vpv.io',
+        host: 'localhost',
+        changeOrigin: false,
+        headers: {
+          host: 'math.vpv.io'
+        },
+        pathRewrite: {
+          '/swagger-resources': '/swagger-resources'
+        }
+      },
+      '/v2': {
+        target: 'https://math.vpv.io',
+        host: 'localhost',
+        changeOrigin: false,
+        headers: {
+          host: 'math.vpv.io'
+        },
+        pathRewrite: {
+          '/v2': '/v2'
+        }
+      },
+
       '/signin': {
         target: 'https://math.vpv.io',
         host: 'localhost',
