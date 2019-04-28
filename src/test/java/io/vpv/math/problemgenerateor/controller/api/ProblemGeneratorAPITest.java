@@ -81,7 +81,7 @@ public class ProblemGeneratorAPITest extends ProblemGenerateorApplicationTests {
     public void shouldBeAbleToDoCORS() throws Exception {
         mockMvc.perform(options("/api").session(mockHttpSession))
                 .andExpect(status().isOk())
-                .andExpect(header().string("Allow", "GET,HEAD"));
+                .andExpect(header().string("Allow", "GET,HEAD,OPTIONS"));
     }
 
     @Test
