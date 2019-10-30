@@ -20,12 +20,12 @@ public class EncryptionServiceTest extends ProblemGenerateorApplicationTests {
         encryptionService.setKeyStr(GOOD_PASS);
         String encrypted = encryptionService.encrypt(text);
         Assert.assertNotNull("should have an encrypted message", encrypted);
-        Assert.assertEquals("Needs to match String", "7E89B6D66B7B001C7AE6955F122530D9", encrypted);
+        Assert.assertEquals("Needs to match String", text, encryptionService.decrypt(encrypted));
     }
 
     @Test
     public void decrypt() throws Exception {
-        String encrypted = "7E89B6D66B7B001C7AE6955F122530D9";
+        String encrypted = encryptionService.encrypt("Hello World!");
         encryptionService.setKeyStr(GOOD_PASS);
         String text = encryptionService.decrypt(encrypted);
         Assert.assertNotNull("should have an encrypted message", text);
