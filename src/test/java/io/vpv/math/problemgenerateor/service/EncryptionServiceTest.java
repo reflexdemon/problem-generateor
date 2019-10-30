@@ -25,8 +25,8 @@ public class EncryptionServiceTest extends ProblemGenerateorApplicationTests {
 
     @Test
     public void decrypt() throws Exception {
-        String encrypted = encryptionService.encrypt("Hello World!");
         encryptionService.setKeyStr(GOOD_PASS);
+        String encrypted = encryptionService.encrypt("Hello World!");
         String text = encryptionService.decrypt(encrypted);
         Assert.assertNotNull("should have an encrypted message", text);
         Assert.assertEquals("Needs to match String", "Hello World!", text);
