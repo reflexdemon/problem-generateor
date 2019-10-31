@@ -34,7 +34,7 @@ public class UserAPITest extends ProblemGenerateorApplicationTests {
     public void getUserFromSession() throws Exception {
         mockMvc.perform(get("/api/user").session(mockHttpSession))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.firstName").isNotEmpty())
                 .andExpect(jsonPath("$.lastName").isNotEmpty())
                 .andExpect(jsonPath("$.email").isNotEmpty());
@@ -45,6 +45,6 @@ public class UserAPITest extends ProblemGenerateorApplicationTests {
     public void getUserFromEmptySession() throws Exception {
         mockMvc.perform(get("/api/user"))
                 .andExpect(status().is4xxClientError())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
     }
 }

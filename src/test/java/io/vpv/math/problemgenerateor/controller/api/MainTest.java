@@ -11,6 +11,7 @@ public class MainTest {
     @Test
     public void main() {
         System.setProperty("server.port", "8181");
+        System.setProperty("spring.profiles.active", "test");
         ProblemGenerateorApplication.main(new String[]{});
     }
 }

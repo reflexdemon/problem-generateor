@@ -1,0 +1,12 @@
+loader:
+  verbose: true
+logging:
+  level:
+    org:
+      springframework:
+
+app:
+  askLogin: "https://truelogin.vpv.io/whoisthis?callback="
+  localEndpoint: "http://localhost:8080/"
+  aeskey: s3cr3tk3s3cr3tk3
+  callback: LOCAL_TESTING
