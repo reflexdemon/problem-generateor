@@ -33,14 +33,14 @@ public class ProblemGeneratorAPITest extends ProblemGenerateorApplicationTests {
     public void getAllApiEndpoints() throws Exception {
         mockMvc.perform(get("/api").session(mockHttpSession))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$[0]").isNotEmpty());
     }
     @Test
     public void getAddProblems() throws Exception {
         mockMvc.perform(get("/api/add").session(mockHttpSession))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$[0].firstNumber").isNotEmpty());
     }
 
@@ -48,7 +48,7 @@ public class ProblemGeneratorAPITest extends ProblemGenerateorApplicationTests {
     public void getSubProblems() throws Exception {
         mockMvc.perform(get("/api/sub").session(mockHttpSession))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$[0].firstNumber").isNotEmpty());
     }
 
@@ -56,7 +56,7 @@ public class ProblemGeneratorAPITest extends ProblemGenerateorApplicationTests {
     public void getAddSubProblems() throws Exception {
         mockMvc.perform(get("/api/addsub").session(mockHttpSession))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$[0].firstNumber").isNotEmpty());
     }
 
@@ -65,7 +65,7 @@ public class ProblemGeneratorAPITest extends ProblemGenerateorApplicationTests {
     public void getMulProblems() throws Exception {
         mockMvc.perform(get("/api/mul").session(mockHttpSession))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$[0].firstNumber").isNotEmpty());
     }
 
@@ -73,7 +73,7 @@ public class ProblemGeneratorAPITest extends ProblemGenerateorApplicationTests {
     public void getDivProblems() throws Exception {
         mockMvc.perform(get("/api/div").session(mockHttpSession))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$[0].firstNumber").isNotEmpty());
     }
 
