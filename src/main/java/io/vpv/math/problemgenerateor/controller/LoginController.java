@@ -40,6 +40,7 @@ public class LoginController {
                            @RequestParam String encryptedToken) {
         try {
             String plainJSON = encryptionService.decrypt(encryptedToken);
+            logger.info("The plainJSON returned is {}", plainJSON);
             User user = objectMapper.readValue(plainJSON, User.class);
             request.getSession(true).setAttribute(SecurityProtection.SESSION_USER, user);
             logger.info("The key returned is {}", key);
