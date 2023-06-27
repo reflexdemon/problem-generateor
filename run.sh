@@ -1,0 +1,1 @@
+CALLBACK_ENDPOINT=http://tst.com SECRET_KEY=100 java -jar target/problem-generateor-0.0.1-SNAPSHOT.jar
